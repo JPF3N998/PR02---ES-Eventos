@@ -1,0 +1,42 @@
+﻿/* Split the screen in half */
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+    left: 0;
+    background-color: #111;
+}
+
+/* Control the right side */
+.right {
+    right: 0;
+    background-color: red;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+/*dropdown styling*/
+.DropDownList {
+    color: #fff;
+    font-size: 15px;
+    margin-top: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: 600;
+    width: auto;
+    background-color: #0277BD;
+}

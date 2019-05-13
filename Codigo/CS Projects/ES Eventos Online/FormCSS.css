@@ -1,0 +1,16 @@
+﻿body {
+    background-color: #34495e;
+    height: auto;
+    font-family: 'Roboto Medium';
+}
+form{
+    height:auto;
+}
+label {
+    font-family: 'Roboto Medium';
+    font-size: 40px;
+    color: #FFFFFF;
+}
+ImageButton{
+    margin-top:10px;
+}
