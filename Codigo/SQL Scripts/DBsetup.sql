@@ -2,11 +2,13 @@
 /*CORRER POR SEPARADO*/
 
 /*1*/
+/*
 CREATE DATABASE ESEventosOnline
 GO
 
 USE ESEventosOnline
 GO
+*/
 
 /*2*/
 DROP PROC IF EXISTS spSetupBD
@@ -82,7 +84,7 @@ CREATE PROC spSetupBD AS
 			FOREIGN KEY (idReservacion) REFERENCES Reservacion(id) 
 		);
 	END
-
+GO
 /*3*/
 DROP PROC IF EXISTS spRegisterAdmin
 GO
@@ -97,6 +99,73 @@ CREATE PROC spRegisterAdmin AS
 	END
 GO
 
+DROP PROC IF EXISTS spFillRecursos
+GO
+
+CREATE PROC  spFillRecursos AS
+	BEGIN
+		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+		BEGIN TRANSACTION
+			INSERT INTO Recurso(nombre)
+			VALUES ('Local')
+			INSERT INTO Recurso(nombre)
+			VALUES ('Catering')
+			INSERT INTO Recurso(nombre)
+			VALUES ('Musica')
+			INSERT INTO Recurso(nombre)
+			VALUES ('Decoracion')
+		COMMIT
+	END
+GO
+
+DROP PROC IF EXISTS spFillPaquetes
+GO
+
+CREATE PROC  spFillPaquetes AS
+	BEGIN
+		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+		BEGIN TRANSACTION
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (1,1)
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (1,2)
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (1,3)
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (1,4)
+
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (2,1)
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (2,2)
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (2,3)
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (2,4)
+
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (3,1)
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (3,2)
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (3,3)
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (3,4)
+
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (4,1)
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (4,2)
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (4,3)
+			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
+			VALUES (4,4)
+			
+		COMMIT
+	END
+GO
+
+
 /*4*/
 EXEC spSetupBD
 GO
@@ -104,3 +173,19 @@ GO
 EXEC spRegisterAdmin
 GO
 
+/*
+DBCC CHECKIDENT ('Usuario',RESEED,0);
+DBCC CHECKIDENT ('Recurso',RESEED,0);
+DBCC CHECKIDENT ('Paquete',RESEED,0);
+DBCC CHECKIDENT ('Producto',RESEED,0);
+DBCC CHECKIDENT ('Reservacion',RESEED,0);
+DBCC CHECKIDENT ('Factura',RESEED,0);
+*/
+
+EXEC spFillRecursos
+GO
+
+/*
+EXEC spFillPaquetes
+GO
+*/
