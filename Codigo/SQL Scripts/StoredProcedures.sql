@@ -18,12 +18,14 @@ CREATE PROC spBuscarRegistro @input CHAR(50), @mode INT, @existe BIT OUTPUT AS
 					DECLARE @usuario CHAR(50)= (SELECT username FROM Usuario WHERE username = @input);
 					IF  @usuario IS NOT NULL
 						BEGIN
+							PRINT('Existe usuario: ' + @input);
 							SET @existe = 0
 							RETURN 0;
 						END
 					ELSE
 						BEGIN
 							SET @existe = 1;
+							PRINT('No existe usuario: ' + @input);
 							(SELECT * FROM Usuario U WHERE @input = U.id);
 							RETURN 0;
 						END
@@ -33,13 +35,15 @@ CREATE PROC spBuscarRegistro @input CHAR(50), @mode INT, @existe BIT OUTPUT AS
 					DECLARE @recurso INT= (SELECT id FROM Recurso WHERE id = CONVERT(INT,@input));
 					IF @recurso IS NULL
 						BEGIN
+							PRINT('No existe recurso: ' + @input);
 							SET @existe = 0
 							RETURN -1
 						END
 					ELSE
 						BEGIN
+							PRINT('Existe el recurso: ' + @input);
 							SET @existe = 1
-							(SELECT * FROM Recurso R WHERE @input = R.id);
+							(SELECT * FROM Recurso R WHERE CONVERT(INT,@input) = R.id);
 							RETURN 0;
 						END
 				END
@@ -91,7 +95,7 @@ GO
 CREATE PROC spBuscarProducto @idRecursoInput INT, @idPaqueteInput INT, @idProductoInput INT,@existeProducto INT OUTPUT AS
 	BEGIN
 	DECLARE @existePaquete BIT;
-	EXEC spBuscarPaquete @idRecursoInput,@idPaqueteInput,@existePaquete;
+	EXEC spBuscarPaquete @idRecursoInput,@idPaqueteInput,@existePaquete OUTPUT;
 	IF @existePaquete = 1 /* Existe paquete*/
 		BEGIN
 			DECLARE @producto INT = (SELECT P.numProductoPaquete FROM Producto P WHERE @idProductoInput=P.numProductoPaquete);
@@ -123,7 +127,7 @@ GO
 CREATE PROC spLogin @nombreUsuarioInput char(50), @passwordInput char(50) AS
 	BEGIN
 		DECLARE @existeUsuario BIT;
-		EXEC spBuscarRegistro @input = @nombreUsuarioInput,@mode = 1,@existe = @existeUsuario;
+		EXEC spBuscarRegistro @input = @nombreUsuarioInput,@mode = 1,@existe = @existeUsuario OUTPUT;
 		IF (@existeUsuario = 1) /* Revisa existencia de usuario */
 			BEGIN
 				DECLARE @foundPassword CHAR(50)= (SELECT U.password FROM Usuario U WHERE @nombreUsuarioInput=U.username); 
@@ -197,13 +201,27 @@ GO
 CREATE PROC spEliminarRecurso @idRecurso INT AS
 	BEGIN
 		DECLARE @existeRecurso BIT;
-		EXEC spBuscarRegistro @input = @idRecurso,@mode = 2, @existe = @existeRecurso;
+		EXEC spBuscarRegistro @input = @idRecurso,@mode = 2, @existe = @existeRecurso OUTPUT;
+		PRINT(CONVERT(CHAR(2),@existeRecurso));
 		IF @existeRecurso = 1
 			BEGIN
+				DECLARE @nombreRecurso NVARCHAR(50) = (SELECT R.nombre FROM Recurso R WHERE R.id = @idRecurso)
+				PRINT('Eliminando recurso: ' + @nombreRecurso)
+				
+				DECLARE @tempP TABLE(idRecurso INT,nombreRecurso NVARCHAR(50), idPaquete INT, idProducto INT, nombre NVARCHAR(50),precio FLOAT)
+				
+				INSERT INTO @tempP(idRecurso,nombreRecurso,idPaquete,idProducto,nombre,precio)
+				SELECT R.id,R.nombre,P.id,Pr.id,Pr.nombre,Pr.precio FROM Recurso R  JOIN (Paquete P JOIN Producto Pr ON P.id=Pr.idPaquete) ON R.id=P.idRecurso WHERE R.id = @idRecurso 
+				SELECT * FROM @tempP
 				SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 				BEGIN TRANSACTION
+					DELETE FROM Producto WHERE Producto.id = (SELECT TP.idProducto FROM @tempP TP WHERE Producto.id=TP.idProducto);
+					DELETE FROM Paquete WHERE Paquete.id = (SELECT TP.idPaquete FROM @tempP TP WHERE Paquete.id = TP.idPaquete);
 					DELETE FROM Recurso WHERE Recurso.id = @idRecurso;
 				COMMIT
 			END
 	END
 GO
+
+EXEC spEliminarRecurso @idRecurso = 2;
+SELECT * FROM Recurso

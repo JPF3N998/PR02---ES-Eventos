@@ -19,16 +19,19 @@ CREATE PROC spSetupBD AS
 
 		CREATE TABLE Usuario(
 			id INT PRIMARY KEY IDENTITY(1,1),
-			nombre CHAR(50),
+			nombre NVARCHAR(50),
 			cedula INT,
-			correo CHAR(50),
-			username CHAR(50),
-			password CHAR(50)
+			correo NVARCHAR(50),
+			username NVARCHAR(50),
+			password NVARCHAR(50)
 		);
 
 		CREATE TABLE Recurso(
 			id INT PRIMARY KEY IDENTITY(1,1),
-			nombre CHAR(50)
+			nombre NVARCHAR(50),
+			correo NVARCHAR(50),
+			telefono NVARCHAR(50),
+			provincia NVARCHAR(50)
 		);
 
 		/*
@@ -54,7 +57,7 @@ CREATE PROC spSetupBD AS
 			id INT PRIMARY KEY IDENTITY(1,1),
 			idPaquete INT,
 			numProductoPaquete INT,
-			nombre CHAR(100),
+			nombre NVARCHAR(100),
 			precio FLOAT,
 			FOREIGN KEY (idPaquete) REFERENCES Paquete(id)
 		);
@@ -92,10 +95,13 @@ GO
 CREATE PROC spRegisterAdmin AS
 	BEGIN
 		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
-		BEGIN TRANSACTION
-			INSERT INTO Usuario(nombre,cedula,correo,username,password)
-			VALUES ('Administrador',12345,'f3n9b0t@gmail.com','admin','admin');
-		COMMIT
+		IF (SELECT U.username FROM Usuario U WHERE username = 'admin') IS NULL
+			BEGIN
+				BEGIN TRANSACTION
+					INSERT INTO Usuario(nombre,cedula,correo,username,password)
+					VALUES ('Administrador',12345,'f3n9b0t@gmail.com','admin','admin');
+				COMMIT
+			END
 	END
 GO
 
@@ -106,14 +112,14 @@ CREATE PROC  spFillRecursos AS
 	BEGIN
 		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		BEGIN TRANSACTION
-			INSERT INTO Recurso(nombre)
-			VALUES ('Local')
-			INSERT INTO Recurso(nombre)
-			VALUES ('Catering')
-			INSERT INTO Recurso(nombre)
-			VALUES ('Musica')
-			INSERT INTO Recurso(nombre)
-			VALUES ('Decoracion')
+			INSERT INTO Recurso(nombre,correo,telefono,provincia)
+			VALUES ('Local','local@correo.com','12345678','Cartago')
+			INSERT INTO Recurso(nombre,correo,telefono,provincia)
+			VALUES ('Catering','catering@correo.com','12345678','Limon')
+			INSERT INTO Recurso(nombre,correo,telefono,provincia)
+			VALUES ('Musica','musica@correo.com','12345678','Alajuela')
+			INSERT INTO Recurso(nombre,correo,telefono,provincia)
+			VALUES ('Decoracion','decoracion@correo.com','12345678','San Jose')
 		COMMIT
 	END
 GO
@@ -131,8 +137,6 @@ CREATE PROC  spFillPaquetes AS
 			VALUES (1,2)
 			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
 			VALUES (1,3)
-			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
-			VALUES (1,4)
 
 			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
 			VALUES (2,1)
@@ -140,8 +144,6 @@ CREATE PROC  spFillPaquetes AS
 			VALUES (2,2)
 			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
 			VALUES (2,3)
-			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
-			VALUES (2,4)
 
 			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
 			VALUES (3,1)
@@ -149,19 +151,55 @@ CREATE PROC  spFillPaquetes AS
 			VALUES (3,2)
 			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
 			VALUES (3,3)
-			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
-			VALUES (3,4)
 
 			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
 			VALUES (4,1)
 			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
 			VALUES (4,2)
 			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
-			VALUES (4,3)
-			INSERT INTO Paquete(idRecurso,numPaqueteRecurso)
-			VALUES (4,4)
-			
+			VALUES (4,3)			
 		COMMIT
+	END
+GO
+
+DROP PROC IF EXISTS spFillProductos
+GO
+
+CREATE PROC spFillProductos AS
+	BEGIN
+		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+		BEGIN TRANSACTION
+			INSERT INTO Producto(idPaquete,numProductoPaquete,nombre,precio)
+			VALUES (1,1,'El Cuartel', 500)
+			INSERT INTO Producto(idPaquete,numProductoPaquete,nombre,precio)
+			VALUES (2,1,'La Concha', 1000)
+			INSERT INTO Producto(idPaquete,numProductoPaquete,nombre,precio)
+			VALUES (3,1,'XCape', 1500)
+
+			INSERT INTO Producto(idPaquete,numProductoPaquete,nombre,precio)
+			VALUES (4,1,'Desayuno', 500)
+			INSERT INTO Producto(idPaquete,numProductoPaquete,nombre,precio)
+			VALUES (5,1,'Almuerzo', 2000)
+			INSERT INTO Producto(idPaquete,numProductoPaquete,nombre,precio)
+			VALUES (6,1,'Cena', 2500)
+
+			INSERT INTO Producto(idPaquete,numProductoPaquete,nombre,precio)
+			VALUES (7,1,'Cocofunka', 500)
+			INSERT INTO Producto(idPaquete,numProductoPaquete,nombre,precio)
+			VALUES (8,1,'Magpie Jay', 3000)
+			INSERT INTO Producto(idPaquete,numProductoPaquete,nombre,precio)
+			VALUES (9,1,'424', 3500)
+
+			INSERT INTO Producto(idPaquete,numProductoPaquete,nombre,precio)
+			VALUES (10,1,'Globos', 500)
+			INSERT INTO Producto(idPaquete,numProductoPaquete,nombre,precio)
+			VALUES (11,1,'Flores', 4000)
+			INSERT INTO Producto(idPaquete,numProductoPaquete,nombre,precio)
+			VALUES (12,1,'Centros de mesa', 4500)
+
+
+		COMMIT
+
 	END
 GO
 
@@ -185,7 +223,8 @@ DBCC CHECKIDENT ('Factura',RESEED,0);
 EXEC spFillRecursos
 GO
 
-/*
 EXEC spFillPaquetes
 GO
-*/
+
+EXEC spFillProductos
+GO
