@@ -3,7 +3,8 @@ GO
 
 DROP PROC IF EXISTS spBuscarRegistro
 GO
-
+SET NOCOUNT ON
+GO
 /*
 	PROC con parametro modo, para cubrir usuarios y recursos
 	Retorna una fila con el usuario o recurso buscado
@@ -57,30 +58,22 @@ DROP PROC IF EXISTS spBuscarPaquete
 GO
 
 /*
-	Busca un paquete con el ID de recurso y el numero de paquete del recurso, no con la llave primaria
+	Busca un paquete con el ID de recurso y la llave primaria del paquete a buscar
 	Retorna: Fila con el paquete especificado
 */
-CREATE PROC spBuscarPaquete @idRecursoInput INT,@idPaqueteInput INT,@existePaqueteInput BIT OUTPUT AS 
+CREATE PROC spBuscarPaquete @idPaqueteInput INT,@existePaqueteInput BIT OUTPUT AS 
 	BEGIN
-		DECLARE @existeRecurso BIT;
-		EXEC spBuscarRegistro @input = @idRecursoInput, @mode = 2, @existe= @existeRecurso OUTPUT;
-		IF @existeRecurso = 0
+		DECLARE @paquete INT = (SELECT P.id FROM Paquete P WHERE @idPaqueteInput = P.id);
+		IF @paquete IS NULL
 			BEGIN
-				RETURN NULL;
+				PRINT('Paquete '+ CONVERT(NVARCHAR(50),@idPaqueteInput) +' no existe.')
+				RETURN -1
 			END
 		ELSE
 			BEGIN
-				DECLARE @paquete INT = (SELECT P.numPaqueteRecurso FROM Paquete P WHERE @idPaqueteInput = P.numPaqueteRecurso);
-				IF @paquete IS NULL
-					BEGIN
-						/*SELECT * FROM Paquete P WHERE @idPaqueteInput = P.numPaqueteRecurso*/
-						RETURN -1
-					END
-				ELSE
-					BEGIN
-						SET @existePaqueteInput = 1;
-						SELECT * FROM Paquete P WHERE @idPaqueteInput = P.numPaqueteRecurso
-					END
+				PRINT('Paquete '+ CONVERT(VARCHAR(50),@paquete)+ ' existe.')
+				SET @existePaqueteInput = 1;
+				SELECT * FROM Paquete P WHERE @idPaqueteInput = P.id
 			END
 	END
 GO
@@ -88,35 +81,26 @@ GO
 DROP PROC IF EXISTS spBuscarProducto
 GO
 /*
-	Busca un producto con el ID de recurso, ID de paquete y numero de producto del paquete, no su ID de llave primaria
+	Busca un producto con el ID de recurso, numero de paquete y numero de producto (todos a traves de llave primaria)
 	Retorna: Fila con el producto especificado
 */
 
-CREATE PROC spBuscarProducto @idRecursoInput INT, @idPaqueteInput INT, @idProductoInput INT,@existeProducto INT OUTPUT AS
+CREATE PROC spBuscarProducto @idProductoInput INT,@existeProducto INT OUTPUT AS
 	BEGIN
-	DECLARE @existePaquete BIT;
-	EXEC spBuscarPaquete @idRecursoInput,@idPaqueteInput,@existePaquete OUTPUT;
-	IF @existePaquete = 1 /* Existe paquete*/
-		BEGIN
-			DECLARE @producto INT = (SELECT P.numProductoPaquete FROM Producto P WHERE @idProductoInput=P.numProductoPaquete);
-			IF @producto IS NULL
-				BEGIN
-					SET @existeProducto = 0;
-					RETURN -1;
-				END
-			ELSE
-				BEGIN
-					SET @existeProducto = 1;
-					(SELECT * FROM Producto P WHERE @idProductoInput=P.numProductoPaquete);
-					RETURN 0;
-				END
-		END
-	ELSE
-		BEGIN
-			SET @existeProducto =0;
-			RETURN -1;
-		END
-
+		DECLARE @producto INT = (SELECT P.id FROM Producto P WHERE P.id=@idProductoInput);
+		IF @producto IS NULL
+			BEGIN
+				PRINT('Producto no existe.')
+				SET @existeProducto = 0;
+				RETURN -1;
+			END
+		ELSE
+			BEGIN
+				PRINT('Producto ' + CONVERT(VARCHAR(50),@producto) + ' existe.')
+				SET @existeProducto = 1;
+				(SELECT * FROM Producto P WHERE @idProductoInput=P.id);
+				RETURN 0;
+			END
 	END
 GO
 
@@ -124,16 +108,27 @@ GO
 DROP PROC IF EXISTS spLogin
 GO
 
-CREATE PROC spLogin @nombreUsuarioInput char(50), @passwordInput char(50) AS
+CREATE PROC spLogin @nombreUsuarioInput char(50), @passwordInput char(50),@adminBIT BIT OUTPUT AS
 	BEGIN
 		DECLARE @existeUsuario BIT;
 		EXEC spBuscarRegistro @input = @nombreUsuarioInput,@mode = 1,@existe = @existeUsuario OUTPUT;
 		IF (@existeUsuario = 1) /* Revisa existencia de usuario */
 			BEGIN
-				DECLARE @foundPassword CHAR(50)= (SELECT U.password FROM Usuario U WHERE @nombreUsuarioInput=U.username); 
+				DECLARE @foundPassword CHAR(50)= (SELECT U.password FROM Usuario U WHERE @nombreUsuarioInput=U.username);
+				DECLARE @isAdmin BIT = (SELECT U.admin FROM Usuario U WHERE U.username = @nombreUsuarioInput); 
 				IF (@foundPassword=@passwordInput) /* Revisa si la contrasenna es la correcta */
 					BEGIN
-						RETURN 1;
+						IF @isAdmin = 1 /*Es administrador*/
+							BEGIN
+								SET @adminBIT = 1;
+								RETURN 1 /*1 para admin*/
+							END
+						ELSE
+							BEGIN
+								SET @adminBit = 0;
+								RETURN 2; /*2 para cliente*/
+							END
+						
 					END
 				ELSE
 					BEGIN
@@ -147,23 +142,32 @@ CREATE PROC spLogin @nombreUsuarioInput char(50), @passwordInput char(50) AS
 	END
 GO
 
-DROP PROC IF EXISTS spCalcularPrecioDelPaquete
-GO
-
-CREATE PROC spCalcularPrecioDelPaquete @numPaquete INT,@precioTotal FLOAT OUTPUT AS
-	BEGIN
-		SET @precioTotal = (SELECT SUM(P.precio) FROM Producto P WHERE P.numProductoPaquete = @numPaquete);
-		RETURN 0;
-	END
-GO
-
 DROP PROC IF EXISTS spVerHistorialAdmin
 GO
 
 CREATE PROC spVerHistorialAdmin @idRecurso INT AS
 	BEGIN
-		SELECT * FROM Factura F JOIN (Reservacion R JOIN (Paquete P JOIN Recurso Re ON P.idRecurso = Re.id) ON R.idPaquete = P.id) ON F.idReservacion = R.id
-		
+		SELECT Re.nombre as [Recurso],Re.correo,Re.telefono,Re.provincia,F.idCliente AS [ID Cliente],F.fechaInicio AS [Fecha Inicio],F.fechaFin AS [Fecha Fin],F.horaInicio AS [Hora Inicio],F.horaFin AS [Hora Fin],F.idReservacion AS [ID Reservacion],R.idPaquete AS [Paquete],F.precioTotal AS [Monto] FROM Factura F JOIN (Reservacion R JOIN (Paquete P JOIN Recurso Re ON P.idRecurso = Re.id) ON R.idPaquete = P.id) ON F.idReservacion = R.id
+	END
+GO
+
+DROP PROC IF EXISTS spGetIDFromUsername
+GO
+/*Devuelve en la variable output la llave primaria con el username como input*/
+CREATE PROC spGetIDFromUsername @usernameInput VARCHAR(50),@idUsuario INT OUTPUT AS
+	BEGIN
+		SET @idUsuario = (SELECT U.id FROM Usuario U WHERE U.username = @idUsuario );
+	END
+GO
+
+DROP PROC IF EXISTS spVerHistorialCliente
+GO
+
+CREATE PROC spVerHistorialCliente @username NVARCHAR(50) AS
+	BEGIN
+		DECLARE @idCliente INT;
+		EXEC spGetIDFromUsername @username,@idCliente OUTPUT;
+		SELECT Re.nombre as [Recurso],Re.correo,Re.telefono,Re.provincia,F.idCliente AS [ID Cliente],F.fechaInicio AS [Fecha Inicio],F.fechaFin AS [Fecha Fin],F.horaInicio AS [Hora Inicio],F.horaFin AS [Hora Fin],F.idReservacion AS [ID Reservacion],R.idPaquete AS [Paquete],F.precioTotal AS [Monto] FROM Factura F JOIN (Reservacion R JOIN (Paquete P JOIN Recurso Re ON P.idRecurso = Re.id) ON R.idPaquete = P.id) ON F.idReservacion = R.id WHERE F.idCliente=@idCliente;
 	END
 GO
 
@@ -185,15 +189,13 @@ CREATE PROC spGetPaquetes @idRecurso INT AS
 		EXEC spBuscarRegistro @input=@idRecurso,@mode= 2,@existe = @existeRecurso;
 		IF @existeRecurso = 1
 			BEGIN
-				SELECT P.numPaqueteRecurso as [Paquete] FROM Paquete P WHERE @idRecurso = P.idRecurso
+				SELECT P.id as [Paquete] FROM Paquete P WHERE @idRecurso = P.idRecurso
 			END
 	END
 GO
 
 DROP PROC IF EXISTS spAgregarRecurso
 GO
-
-
 
 DROP PROC IF EXISTS spEliminarRecurso
 GO
@@ -202,7 +204,6 @@ CREATE PROC spEliminarRecurso @idRecurso INT AS
 	BEGIN
 		DECLARE @existeRecurso BIT;
 		EXEC spBuscarRegistro @input = @idRecurso,@mode = 2, @existe = @existeRecurso OUTPUT;
-		PRINT(CONVERT(CHAR(2),@existeRecurso));
 		IF @existeRecurso = 1
 			BEGIN
 				DECLARE @nombreRecurso NVARCHAR(50) = (SELECT R.nombre FROM Recurso R WHERE R.id = @idRecurso)
@@ -223,34 +224,104 @@ CREATE PROC spEliminarRecurso @idRecurso INT AS
 	END
 GO
 
-DROP PROC IF EXISTS spAgregarCliente
+DROP PROC IF EXISTS spEliminarPaquete
 GO
 
-CREATE PROC spAgregarCliente @nombreIn nvarchar(50), @cedulaIn int, @emailIn nvarchar(50), @userNameIn nvarchar(50), @passwordIn nvarchar(50) AS
-BEGIN
-	DECLARE @result int;
-	BEGIN TRY
-		if Exists(SELECT * FROM dbo.Usuario AS U WHERE U.username = @userNameIn)
+/* Eliminar el paquete deseado pero con su numero de paquete del recurso, no su llave primaria */
+CREATE PROC spEliminarPaquete @idPaquete INT AS
+	BEGIN
+		DECLARE @nombreRecurso NVARCHAR(50) = (SELECT R.nombre FROM Paquete P JOIN Recurso R ON P.idRecurso=R.id WHERE P.id = @idPaquete)
+		DECLARE @existePaquete BIT;
+		EXEC spBuscarPaquete @idPaquete,@existePaquete OUTPUT;
+		IF	@existePaquete = 1
 			BEGIN
-			SET @result = -1;
-			RETURN @result;
+				PRINT('Eliminando paquete '+ @idPaquete + ' del recurso ' +@nombreRecurso)
+				SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+				BEGIN TRANSACTION
+					DELETE FROM Producto WHERE Producto.idPaquete = @idPaquete 
+					DELETE FROM Paquete WHERE Paquete.id = @idPaquete
+				COMMIT
 			END
-		IF @@TRANCOUNT = 0
-			BEGIN
-			SET TRANSACTION ISOLATION LEVEL READ COMMITTED
-			BEGIN TRANSACTION
-			END
-		INSERT INTO dbo.Usuario	VALUES (@nombreIn, @cedulaIn, @emailIn, @userNameIn, @passwordIn);
-		IF @@TRANCOUNT > 0
-			COMMIT;
-		SET @result = 1;
-		RETURN @result;
-	END TRY
-	BEGIN CATCH
-		IF @@TRANCOUNT > 0
-			ROLLBACK;
-		SET @result = -1;
-		RETURN @result;
-	END CATCH
-END
+	END
 GO
+
+DROP PROC IF EXISTS spEliminarProducto
+GO
+/* spEliminarProducto usa como entrada la llave primaria del producto a borrar*/
+CREATE PROC spEliminarProducto @idProducto INT AS
+	BEGIN
+		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+		BEGIN TRANSACTION
+			DECLARE @producto NVARCHAR(50)= (SELECT P.nombre FROM Producto P WHERE P.id=@idProducto);
+			PRINT('Borrando producto: '+@producto);
+			DELETE FROM Producto WHERE Producto.id = @idProducto
+		COMMIT
+	END
+GO
+
+DROP PROC IF EXISTS spAgregarRecurso
+GO
+
+CREATE PROC spAgregarRecurso @nombreRecurso NVARCHAR(50),@correoRecurso NVARCHAR(50),@telefonoRecurso NVARCHAR(50),@provinciaRecurso NVARCHAR(50) AS
+	BEGIN
+		BEGIN TRY
+			IF EXISTS (SELECT R.nombre FROM Recurso R WHERE R.nombre=@nombreRecurso)
+				BEGIN
+					PRINT('Recurso ' +@nombreRecurso+' ya existe.');
+					RETURN -1;
+				END
+			ELSE
+				BEGIN
+					
+					SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+					BEGIN TRANSACTION
+						INSERT INTO Recurso(nombre,correo,telefono,provincia)
+						VALUES(@nombreRecurso,@correoRecurso,@telefonoRecurso,@provinciaRecurso)
+					COMMIT
+					PRINT('Recurso nuevo '+@nombreRecurso+' agregado exitosamente')
+					RETURN 0/*Codigo de exito*/
+				END
+		END TRY
+		BEGIN CATCH
+			RETURN -1
+		END CATCH
+	END
+GO
+
+DROP PROC IF EXISTS spAgregarPaquete
+GO
+
+CREATE PROC spAgregarPaquete @idRecurso INT AS
+	BEGIN
+		DECLARE @existeRecurso BIT;
+		EXEC spBuscarRegistro @idRecurso,2,@existeRecurso OUTPUT;
+		IF @existeRecurso = 1
+			BEGIN
+				SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+				BEGIN TRANSACTION
+					INSERT INTO Paquete(idRecurso)
+					VALUES (@idRecurso)
+				COMMIT
+			END
+		ELSE
+			BEGIN
+				RETURN -1
+			END
+	END
+GO
+
+/*
+SELECT * FROM Recurso
+SELECT * FROM Paquete
+SELECT * FROM Producto
+
+EXEC spEliminarRecurso 5
+EXEC spEliminarPaquete 11
+EXEC spEliminarProducto 6
+*/
+/*
+exec spAgregarRecurso 'Decoracion','reposteria@correo.com','12345678','Heredia'
+exec spAgregarRecurso 'Reposteria','reposteria@correo.com','12345678','Heredia'
+exec spAgregarRecurso 'Miscelaneos','misc@correo.com','12345678','Limon'
+exec spAgregarPaquete '6'
+*/
