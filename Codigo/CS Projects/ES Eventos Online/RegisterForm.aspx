@@ -41,7 +41,7 @@
             <br />
                 <asp:TextBox ID="ContrasennaInput" runat="server" Width="170px" Height="20px" style="margin-bottom:50px"></asp:TextBox>
             <br />
-            <asp:Button ID="signupBtn" runat="server" Text="Registrarse" BorderStyle="Solid" style="margin-bottom:30px;width:auto" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238"/>    
+            <asp:Button ID="signupBtn" runat="server" Text="Registrarse" BorderStyle="Solid" style="margin-bottom:30px;width:auto" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238" OnClick="signupBtn_Click"/>    
         </div>
     </form>
 </body>
