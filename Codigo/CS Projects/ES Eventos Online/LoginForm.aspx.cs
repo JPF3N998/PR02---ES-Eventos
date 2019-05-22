@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,7 @@ namespace ES_Eventos_Online
 {
     public partial class LoginForm : System.Web.UI.Page
     {
+        string server = Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -17,6 +19,7 @@ namespace ES_Eventos_Online
 
         protected void loginBtn_Click(object sender, EventArgs e)
         {
+            // Validaciones de todos los datos para mantener la integridad de la base de datos
             string userName = userNameInput.Text;
             if (userName == "" || userName == null)
             {
@@ -32,11 +35,33 @@ namespace ES_Eventos_Online
             }
 
 
-            // Esto tiene mis configuraciones para conectarse a mi base de datos tienen que cambiarla para probarla ustedes
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-RSCO601\\SQLEXPRESS;Initial Catalog=ESEventosOnline;Integrated Security=True");
-            SqlCommand cmd = new SqlCommand("spAgregarCliente", con);
+            // Se empieza la conexion a la base de datos para encontrar la cuenta
+            SqlConnection con = new SqlConnection(server);
+            SqlCommand cmd = new SqlCommand("spLogin", con);
+            cmd.CommandType = CommandType.StoredProcedure;
 
+            // Parametros del SP
+            cmd.Parameters.Add("@nombreUsuarioInput", SqlDbType.Char).Value = userName;
+            cmd.Parameters.Add("@passwordInput", SqlDbType.Char).Value = password;
+            cmd.Parameters.Add("@isAdmin", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
 
+            // Se ejecuta el SP
+            con.Open();
+            cmd.ExecuteNonQuery();
+
+            // Valor de retorno importante
+            int returnValue = int.Parse(cmd.Parameters["@isAdmin"].Value.ToString());
+
+            // No dejar la conexion abierta
+            con.Close();
+
+            // Se redirecciona de acuerdo al tipo de cuenta que se haya encontrado ADMIN o CLIENTE
+            if (returnValue == 1)
+                Response.Redirect("AdministradorPortal.aspx");
+            else if (returnValue == 0)
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('La cuenta del cliente fue encontrada');", true);
+            else
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('La cuenta no fue encontrada, verifique sus credenciales');", true);
 
         }
     }

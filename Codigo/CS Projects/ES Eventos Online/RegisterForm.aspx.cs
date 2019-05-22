@@ -11,6 +11,8 @@ namespace ES_Eventos_Online
 {
     public partial class RegisterLogin : System.Web.UI.Page
     {
+        string server = Global.configServerName + ";Initial Catalog=ESEventosOnline;Integrated Security=True";
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -18,15 +20,13 @@ namespace ES_Eventos_Online
 
         protected void signupBtn_Click(object sender, EventArgs e)
         {
-            // Validacion de argumentos para enviarlos a la base de datos
+            // Validaciones de todos los datos para mantener la integridad de la base de datos
             String nombreIn = nombreInput.Text;
             if (nombreIn == "" || nombreIn == null)
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error el nombre no puede ser vacio');", true);
                 return;
             }
-            //Response.Write("<script>alert('Error el nombre no puede ser vacio')</script>");
-
 
             int cedulaIn;
             if (!int.TryParse(NumCedulaInput.Text, out cedulaIn))
@@ -56,10 +56,12 @@ namespace ES_Eventos_Online
                 return;
             }
 
-            // Esto tiene mis configuraciones para conectarse a mi base de datos tienen que cambiarla para probarla ustedes
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-RSCO601\\SQLEXPRESS;Initial Catalog=ESEventosOnline;Integrated Security=True");
+            // Se empieza la conexion a la base de datos para crear la cuenta
+            SqlConnection con = new SqlConnection(server);
             SqlCommand cmd = new SqlCommand("spAgregarCliente", con);
             cmd.CommandType = CommandType.StoredProcedure;
+
+            // Parametros del SP
             cmd.Parameters.Add("@nombreIn", SqlDbType.NVarChar).Value = nombreIn;
             cmd.Parameters.Add("@cedulaIn", SqlDbType.Int).Value = cedulaIn;
             cmd.Parameters.Add("@emailIn", SqlDbType.NVarChar).Value = emailIn;
@@ -67,13 +69,19 @@ namespace ES_Eventos_Online
             cmd.Parameters.Add("@passwordIn", SqlDbType.NVarChar).Value = passwordIn;
             cmd.Parameters.Add("@result", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
 
+            // Se ejecuta el SP
             con.Open();
             cmd.ExecuteNonQuery();
 
+            // Valor de retorno importante
             int returnValue = int.Parse(cmd.Parameters["@result"].Value.ToString());
+
+            // No dejar la conexion abierta
             con.Close();
 
-            if(returnValue == -1)
+
+            // Se informa al cliente si ocurrio algun error en la creacion de la cuenta o si fue exitosa la creacion
+            if (returnValue == -1)
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error la cuenta ya existe');", true);
             else
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('La cuenta fue creada');", true);

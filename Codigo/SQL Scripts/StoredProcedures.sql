@@ -108,37 +108,30 @@ GO
 DROP PROC IF EXISTS spLogin
 GO
 
-CREATE PROC spLogin @nombreUsuarioInput char(50), @passwordInput char(50),@adminBIT BIT OUTPUT AS
+CREATE PROC spLogin @nombreUsuarioInput char(50), @passwordInput char(50) AS
 	BEGIN
-		DECLARE @existeUsuario BIT;
-		EXEC spBuscarRegistro @input = @nombreUsuarioInput,@mode = 1,@existe = @existeUsuario OUTPUT;
-		IF (@existeUsuario = 1) /* Revisa existencia de usuario */
+		DECLARE @isAdmin INT;
+		IF(EXISTS(SELECT * FROM dbo.Usuario AS U WHERE U.username = @nombreUsuarioInput))
 			BEGIN
-				DECLARE @foundPassword CHAR(50)= (SELECT U.password FROM Usuario U WHERE @nombreUsuarioInput=U.username);
-				DECLARE @isAdmin BIT = (SELECT U.admin FROM Usuario U WHERE U.username = @nombreUsuarioInput); 
-				IF (@foundPassword=@passwordInput) /* Revisa si la contrasenna es la correcta */
-					BEGIN
-						IF @isAdmin = 1 /*Es administrador*/
-							BEGIN
-								SET @adminBIT = 1;
-								RETURN 1 /*1 para admin*/
-							END
-						ELSE
-							BEGIN
-								SET @adminBit = 0;
-								RETURN 2; /*2 para cliente*/
-							END
-						
-					END
-				ELSE
-					BEGIN
-						RETURN 0;
-					END
+			DECLARE @pass char(50) = (SELECT U.password FROM dbo.Usuario AS U WHERE U.username = @nombreUsuarioInput);
+			IF(@passwordInput = @pass)
+				BEGIN
+					IF((SELECT U.admin FROM dbo.Usuario AS U WHERE U.username = @nombreUsuarioInput) = 1)
+						BEGIN
+						SET @isAdmin = 1;
+						RETURN @isAdmin;
+						END
+					ELSE
+						BEGIN
+						SET @isAdmin = 0;
+						RETURN @isAdmin;
+						END
+				END
 			END
 		ELSE
-			BEGIN
-				RETURN 0;
-			END
+			SET @isAdmin = -1;
+			RETURN @isAdmin;
+
 	END
 GO
 
@@ -370,7 +363,7 @@ BEGIN
 			SET TRANSACTION ISOLATION LEVEL READ COMMITTED 
 			BEGIN TRANSACTION 
 			END 
-		INSERT INTO dbo.Usuario	VALUES (@nombreIn, @cedulaIn, @emailIn, @userNameIn, @passwordIn); 
+		INSERT INTO dbo.Usuario	VALUES (@nombreIn, @cedulaIn, @emailIn, @userNameIn, @passwordIn, 0); 
 		IF @@TRANCOUNT > 0 
 			COMMIT; 
 		SET @result = 1; 

@@ -91,6 +91,7 @@
     <Compile Include="AdministradorRecursos.aspx.designer.cs">
       <DependentUpon>AdministradorRecursos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Global.cs" />
     <Compile Include="LoginForm.aspx.cs">
       <DependentUpon>LoginForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
