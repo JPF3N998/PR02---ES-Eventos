@@ -310,6 +310,49 @@ CREATE PROC spAgregarPaquete @idRecurso INT AS
 	END
 GO
 
+DROP PROC IF EXISTS spAgregarProducto
+GO
+
+CREATE PROC spAgregarProducto @idRecurso INT,@idPaquete INT,@nombreProducto NVARCHAR(50),@precioProducto FLOAT AS
+	BEGIN
+		DECLARE @existeRecurso BIT;
+		EXEC spBuscarRegistro @idRecurso,2,@existeRecurso OUTPUT;
+		IF @existeRecurso = 1
+			BEGIN
+				DECLARE @existePaquete BIT;
+				EXEC spBuscarPaquete @idPaquete,@existePaquete OUTPUT;
+				IF @existePaquete = 1
+					BEGIN
+						DECLARE @existeNombre NVARCHAR(50) = (SELECT P.nombre FROM Producto P WHERE P.nombre=@nombreProducto AND P.idPaquete=@idPaquete);
+						IF @existeNombre IS NULL
+							BEGIN
+							SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+							BEGIN TRANSACTION
+								INSERT INTO Producto(idPaquete,nombre,precio)
+								VALUES(@idPaquete,@nombreProducto,@precioProducto)
+							COMMIT
+							DECLARE @nombreRecurso NVARCHAR(50) = (SELECT R.nombre FROM Recurso R WHERE R.id = @idRecurso);
+							PRINT('Agregando '+@nombreProducto+ ' en el paquete '+CONVERT(NVARCHAR(50),@idPaquete)+ ' del recurso '+@nombreRecurso);
+							END
+						ELSE
+							BEGIN
+								PRINT('Producto '+@nombreProducto+' ya existe en el paquete')
+								RETURN -1;
+							END
+						END
+				ELSE
+					BEGIN
+						RETURN -1
+					END
+			END
+		ELSE
+			BEGIN
+				RETURN -1
+			END
+	END
+GO
+
+
 /*
 SELECT * FROM Recurso
 SELECT * FROM Paquete
@@ -324,4 +367,7 @@ exec spAgregarRecurso 'Decoracion','reposteria@correo.com','12345678','Heredia'
 exec spAgregarRecurso 'Reposteria','reposteria@correo.com','12345678','Heredia'
 exec spAgregarRecurso 'Miscelaneos','misc@correo.com','12345678','Limon'
 exec spAgregarPaquete '6'
+exec spAgregarProducto 6,13,'Limpieza',1200
+exec spAgregarProducto 6,13,'Pintura',1200exec spAgregarProducto 6,13,'Seguridad',1200
+
 */
