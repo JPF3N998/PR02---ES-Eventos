@@ -54,3 +54,59 @@ D:\Documents\Programming\Visual Studio\CS Projects\ES Eventos Online\obj\Debug\E
 D:\Documents\Programming\Visual Studio\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.dll
 D:\Documents\Programming\Visual Studio\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.pdb
 D:\Documents\Programming\Visual Studio\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.csprojAssemblyReference.cache
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\ES Eventos Online.dll.config
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\ES Eventos Online.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\ES Eventos Online.pdb
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csc.exe
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csc.exe.config
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csc.rsp
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csi.exe
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csi.exe.config
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csi.rsp
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CSharp.Core.targets
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.Managed.Core.targets
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.VisualBasic.Core.targets
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.AppContext.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Collections.Immutable.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Console.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Diagnostics.StackTrace.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.Compression.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.FileSystem.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.FileSystem.Primitives.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.Pipes.AccessControl.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.Pipes.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Reflection.Metadata.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.AccessControl.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Claims.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Cryptography.Encoding.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Cryptography.Primitives.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Principal.Windows.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Text.Encoding.CodePages.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.ValueTuple.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Xml.ReaderWriter.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Xml.XmlDocument.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Xml.XPath.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Xml.XPath.XDocument.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\vbc.exe
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\vbc.exe.config
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\vbc.rsp
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\VBCSCompiler.exe
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\VBCSCompiler.exe.config
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.csprojAssemblyReference.cache
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.csproj.CoreCompileInputs.cache
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.csproj.CopyComplete
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.dll
+A:\GIT_ROOT\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.pdb
