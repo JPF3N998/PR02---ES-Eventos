@@ -140,7 +140,7 @@ GO
 
 CREATE PROC spVerHistorialAdmin @idRecurso INT AS
 	BEGIN
-		SELECT Re.nombre as [Recurso],Re.correo,Re.telefono,Re.provincia,F.idCliente AS [ID Cliente],F.fechaInicio AS [Fecha Inicio],F.fechaFin AS [Fecha Fin],F.horaInicio AS [Hora Inicio],F.horaFin AS [Hora Fin],F.idReservacion AS [ID Reservacion],R.idPaquete AS [Paquete],F.precioTotal AS [Monto] FROM Factura F JOIN (Reservacion R JOIN (Paquete P JOIN Recurso Re ON P.idRecurso = Re.id) ON R.idPaquete = P.id) ON F.idReservacion = R.id
+		SELECT Re.nombre as [Recurso],Re.correo,Re.telefono,Re.provincia,F.idCliente AS [ID Cliente],F.fecha AS [Fecha],F.horaInicio AS [Hora Inicio],F.horaFin AS [Hora Fin],F.idReservacion AS [ID Reservacion],R.idPaquete AS [Paquete],F.precioTotal AS [Monto] FROM Factura F JOIN (Reservacion R JOIN (Paquete P JOIN Recurso Re ON P.idRecurso = Re.id) ON R.idPaquete = P.id) ON F.idReservacion = R.id
 	END
 GO
 
@@ -160,7 +160,7 @@ CREATE PROC spVerHistorialCliente @username NVARCHAR(50) AS
 	BEGIN
 		DECLARE @idCliente INT;
 		EXEC spGetIDFromUsername @username,@idCliente OUTPUT;
-		SELECT Re.nombre as [Recurso],Re.correo,Re.telefono,Re.provincia,F.idCliente AS [ID Cliente],F.fechaInicio AS [Fecha Inicio],F.fechaFin AS [Fecha Fin],F.horaInicio AS [Hora Inicio],F.horaFin AS [Hora Fin],F.idReservacion AS [ID Reservacion],R.idPaquete AS [Paquete],F.precioTotal AS [Monto] FROM Factura F JOIN (Reservacion R JOIN (Paquete P JOIN Recurso Re ON P.idRecurso = Re.id) ON R.idPaquete = P.id) ON F.idReservacion = R.id WHERE F.idCliente=@idCliente;
+		SELECT Re.nombre as [Recurso],Re.correo,Re.telefono,Re.provincia,F.idCliente AS [ID Cliente],F.fecha AS [Fecha],F.horaInicio AS [Hora Inicio],F.horaFin AS [Hora Fin],F.idReservacion AS [ID Reservacion],R.idPaquete AS [Paquete],F.precioTotal AS [Monto] FROM Factura F JOIN (Reservacion R JOIN (Paquete P JOIN Recurso Re ON P.idRecurso = Re.id) ON R.idPaquete = P.id) ON F.idReservacion = R.id WHERE F.idCliente=@idCliente;
 	END
 GO
 
@@ -355,6 +355,7 @@ BEGIN
 	BEGIN TRY 
 		if Exists(SELECT * FROM dbo.Usuario AS U WHERE U.username = @userNameIn) 
 			BEGIN 
+			PRINT('Usuario '+@userNameIn+' ya existe.')
 			SET @result = -1; 
 			RETURN @result; 
 			END 
@@ -377,6 +378,85 @@ BEGIN
 	END CATCH 
 END 
 GO
+
+DROP PROC IF EXISTS spGetPrecioDelPaquete
+GO
+
+CREATE PROC spGetPrecioDelPaquete @idPaquete INT,@precio FLOAT OUTPUT AS
+	BEGIN
+		IF EXISTS (SELECT P.id FROM Paquete P WHERE P.id = @idPaquete)
+			BEGIN
+				SET @precio = (SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = @idPaquete)
+				PRINT('Precio del paquete: '+CONVERT(NVARCHAR(50),@precio))
+				RETURN 0
+			END
+		ELSE
+			BEGIN
+				PRINT('Paquete '+CONVERT(NVARCHAR(50),@idPaquete)+' no existe')
+				RETURN -1
+			END
+	END
+GO
+
+DROP PROC IF EXISTS spReservar
+GO
+/*Se usa el username para la reservacion del paquete*/
+CREATE PROC spReservar @username NVARCHAR(50),@idPaquete INT,@fecha NVARCHAR(50),@horaInicio NVARCHAR(20),@horaFin NVARCHAR(20) AS
+	BEGIN
+		DECLARE @idCliente INT = (SELECT U.id FROM Usuario U WHERE U.username = @username);
+		IF @idCliente IS NULL
+			BEGIN
+				PRINT('Cliente no pudo ser encontrado')
+				RETURN -1;
+			END
+		ELSE
+			BEGIN
+				/*Conversion de entradas a sus tipos de dato respectivos*/
+				DECLARE @fechaDATE DATE = CONVERT(DATE,@fecha,103)
+				DECLARE @horaInicioTIME TIME= CONVERT(TIME,@horaInicio,108)
+				DECLARE @horaFinTIME TIME = CONVERT(TIME,@horaFin,108)
+				/*Chequeo de choque de horarios*/
+				DECLARE @horariosDelPaquete TABLE(idPaquete INT,fecha DATE, horaInicio TIME(0),horaFin TIME(0));
+				/*Tabla temporal donde se encuentran todas las reservaciones del paquete en ese dia*/
+				INSERT INTO @horariosDelPaquete
+				SELECT P.id,R.fecha,R.horaInicio,R.horaFin FROM Paquete P JOIN Reservacion R ON P.id = R.idPaquete
+				WHERE @idPaquete = P.id AND R.fecha = @fechaDATE
+				AND ((R.horaInicio <= @horaInicioTIME AND R.horaInicio <= R.horaFin) OR (R.horaInicio <= @horaFinTIME AND R.horaFin <= @horaFinTIME))
+				
+				SELECT * FROM @horariosDelPaquete
+				IF EXISTS (SELECT * FROM @horariosDelPaquete)
+					BEGIN
+						PRINT('Hay choque de horarios')
+			
+						RETURN -1
+					END
+				ELSE
+					BEGIN TRY
+						DECLARE @precioDeLaReservacion FLOAT;
+						EXEC spGetPrecioDelPaquete @idPaquete,@precioDeLaReservacion OUTPUT;
+						SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+						BEGIN TRANSACTION
+							INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
+							VALUES (@idCliente,@idPaquete,@fechaDATE,@horaInicioTIME,@horaFinTIME,@precioDeLaReservacion)
+							INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
+							VALUES (@idCliente,@idPaquete,@fechaDATE,@horaInicioTIME,@horaFinTIME,@precioDeLaReservacion)
+						COMMIT
+						PRINT('Reservacion establecida')
+						RETURN 0;
+					END TRY
+					BEGIN CATCH
+						PRINT('Error en la transaccion a la hora de registrar reservacion');
+						RETURN -1;
+					END CATCH
+			END
+	END
+GO
+
+/*
+EXEC spReservar 'admin',2,'20/05/2019','7:00','22:00'
+*/
+
+
 
 /*
 SELECT * FROM Recurso

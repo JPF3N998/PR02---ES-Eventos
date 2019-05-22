@@ -65,8 +65,7 @@ CREATE PROC spSetupBD AS
 			id INT PRIMARY KEY IDENTITY(1,1),
 			idCliente INT,
 			idPaquete INT,
-			fechaInicio DATE,
-			fechaFin DATE,
+			fecha DATE,
 			horaInicio TIME,
 			horaFin TIME,
 			precioTotal FLOAT,
@@ -78,8 +77,7 @@ CREATE PROC spSetupBD AS
 			id INT PRIMARY KEY IDENTITY(1,1),
 			idCliente INT,
 			idReservacion INT,
-			fechaInicio DATE,
-			fechaFin DATE,
+			fecha DATE,
 			horaInicio TIME,
 			horaFin TIME,
 			precioTotal FLOAT,
@@ -198,13 +196,32 @@ CREATE PROC spFillProductos AS
 			VALUES (11,'Flores', 4000)
 			INSERT INTO Producto(idPaquete,nombre,precio)
 			VALUES (12,'Centros de mesa', 4500)
-
-
 		COMMIT
-
 	END
 GO
 
+DROP PROC IF EXISTS spFillReservacionesFacturas
+GO
+
+CREATE PROC spFillReservacionesFacturas AS
+	BEGIN
+		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
+		VALUES (1,2,(CONVERT(DATE,'02/04/2019',103)),CONVERT(TIME,'14:00',108),CONVERT(TIME,'18:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
+		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
+		VALUES (1,1,(CONVERT(DATE,'02/04/2019',103)),CONVERT(TIME,'14:00',108),CONVERT(TIME,'18:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
+		
+		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
+		VALUES (1,2,(CONVERT(DATE,'20/05/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'21:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
+		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
+		VALUES (1,2,(CONVERT(DATE,'20/05/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'21:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
+		
+		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
+		VALUES (1,2,(CONVERT(DATE,'22/05/2019',103)),CONVERT(TIME,'8:00',108),CONVERT(TIME,'12:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
+		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
+		VALUES (1,3,(CONVERT(DATE,'22/05/2019',103)),CONVERT(TIME,'8:00',108),CONVERT(TIME,'12:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
+	
+	END
+GO
 
 /*4*/
 EXEC spSetupBD
@@ -229,4 +246,7 @@ EXEC spFillPaquetes
 GO
 
 EXEC spFillProductos
+GO
+
+EXEC spFillReservacionesFacturas
 GO

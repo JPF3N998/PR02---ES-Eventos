@@ -72,6 +72,7 @@
     <Content Include="AdministradorRecursos.aspx" />
     <Content Include="FormCSS.css" />
     <Content Include="LoginForm.aspx" />
+    <Content Include="RegisterAdminForm.aspx" />
     <Content Include="RegisterForm.aspx" />
     <Content Include="Resources\sharp_arrow_back_black_36dp.png" />
     <Content Include="Web.config" />
@@ -100,6 +101,13 @@
       <DependentUpon>LoginForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterAdminForm.aspx.cs">
+      <DependentUpon>RegisterAdminForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegisterAdminForm.aspx.designer.cs">
+      <DependentUpon>RegisterAdminForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="RegisterForm.aspx.cs">
       <DependentUpon>RegisterForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

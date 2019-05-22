@@ -10,16 +10,16 @@
 namespace ES_Eventos_Online {
     
     
-    public partial class AdministradorPortalForm {
+    public partial class RegisterAdminForm {
         
         /// <summary>
-        /// AdminPortal control.
+        /// RegisterForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm AdminPortal;
+        protected global::System.Web.UI.HtmlControls.HtmlForm RegisterForm;
         
         /// <summary>
         /// ImageButton1 control.
@@ -31,57 +31,93 @@ namespace ES_Eventos_Online {
         protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
         
         /// <summary>
-        /// HyperLink1 control.
+        /// nombreLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        protected global::System.Web.UI.WebControls.Label nombreLbl;
         
         /// <summary>
-        /// resourcesBtn control.
+        /// nombreInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button resourcesBtn;
+        protected global::System.Web.UI.WebControls.TextBox nombreInput;
         
         /// <summary>
-        /// registerAdminBtn control.
+        /// NumCedulaInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button registerAdminBtn;
+        protected global::System.Web.UI.WebControls.TextBox NumCedulaInput;
         
         /// <summary>
-        /// historyLbl control.
+        /// correoElectronicoLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label historyLbl;
+        protected global::System.Web.UI.WebControls.Label correoElectronicoLbl;
         
         /// <summary>
-        /// recursosDropdown control.
+        /// correoElectronicoInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList recursosDropdown;
+        protected global::System.Web.UI.WebControls.TextBox correoElectronicoInput;
         
         /// <summary>
-        /// adminGridView control.
+        /// UsernameLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView adminGridView;
+        protected global::System.Web.UI.WebControls.Label UsernameLbl;
+        
+        /// <summary>
+        /// UsernameInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox UsernameInput;
+        
+        /// <summary>
+        /// ContrasennaLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ContrasennaLbl;
+        
+        /// <summary>
+        /// ContrasennaInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ContrasennaInput;
+        
+        /// <summary>
+        /// signupBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button signupBtn;
     }
 }

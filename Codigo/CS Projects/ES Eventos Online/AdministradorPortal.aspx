@@ -15,7 +15,9 @@
             <asp:HyperLink runat="server" ID="HyperLink1" Text="Resource MGMT" Font-Underline="True" Font-Size="20px" ForeColor="#2ECC71" NavigateUrl="~/AdministradorRecursos.aspx"></asp:HyperLink>
         </div>
         <div style="text-align:center;margin-bottom:50px">
-           <asp:Button ID="resourcesBtn" runat="server" Text="Gestionar recursos" BorderStyle="Solid" style="margin-bottom:30px;width:auto" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238"/>
+           <asp:Button ID="resourcesBtn" runat="server" Text="Gestionar recursos" BorderStyle="Solid" style="margin-bottom:30px;" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238" Width="866px"/>
+            <br />
+            <asp:Button ID="registerAdminBtn" runat="server" Text="Registrar nuevo administrador" BorderStyle="Solid" style="margin-bottom:30px;width:auto" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238"/>
             <br />
            <asp:Label ID="historyLbl" runat="server" Text="Historial" style="height:auto;width:initial" Font-Bold="true" Font-Size="72px" ForeColor="#FFFFFF"/>
             <br />
