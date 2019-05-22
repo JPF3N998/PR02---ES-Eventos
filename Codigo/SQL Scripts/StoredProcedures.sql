@@ -353,6 +353,38 @@ CREATE PROC spAgregarProducto @idRecurso INT,@idPaquete INT,@nombreProducto NVAR
 GO
 
 
+DROP PROC IF EXISTS spAgregarCliente 
+GO 
+ 
+CREATE PROC spAgregarCliente @nombreIn nvarchar(50), @cedulaIn int, @emailIn nvarchar(50), @userNameIn nvarchar(50), @passwordIn nvarchar(50) AS 
+BEGIN 
+	DECLARE @result int; 
+	BEGIN TRY 
+		if Exists(SELECT * FROM dbo.Usuario AS U WHERE U.username = @userNameIn) 
+			BEGIN 
+			SET @result = -1; 
+			RETURN @result; 
+			END 
+		IF @@TRANCOUNT = 0 
+			BEGIN 
+			SET TRANSACTION ISOLATION LEVEL READ COMMITTED 
+			BEGIN TRANSACTION 
+			END 
+		INSERT INTO dbo.Usuario	VALUES (@nombreIn, @cedulaIn, @emailIn, @userNameIn, @passwordIn); 
+		IF @@TRANCOUNT > 0 
+			COMMIT; 
+		SET @result = 1; 
+		RETURN @result; 
+	END TRY 
+	BEGIN CATCH 
+		IF @@TRANCOUNT > 0 
+			ROLLBACK; 
+		SET @result = -1; 
+		RETURN @result; 
+	END CATCH 
+END 
+GO
+
 /*
 SELECT * FROM Recurso
 SELECT * FROM Paquete

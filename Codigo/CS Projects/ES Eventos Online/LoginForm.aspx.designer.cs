@@ -22,13 +22,13 @@ namespace ES_Eventos_Online {
         protected global::System.Web.UI.WebControls.Label usernameLbl;
         
         /// <summary>
-        /// TextBox1 control.
+        /// userNameInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox userNameInput;
         
         /// <summary>
         /// passwordLbl control.
@@ -38,6 +38,15 @@ namespace ES_Eventos_Online {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label passwordLbl;
+        
+        /// <summary>
+        /// passwordInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox passwordInput;
         
         /// <summary>
         /// loginBtn control.

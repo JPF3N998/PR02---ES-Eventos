@@ -18,13 +18,12 @@ namespace ES_Eventos_Online
 
         protected void signupBtn_Click(object sender, EventArgs e)
         {
-            bool error = false;
             // Validacion de argumentos para enviarlos a la base de datos
             String nombreIn = nombreInput.Text;
             if (nombreIn == "" || nombreIn == null)
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error el nombre no puede ser vacio');", true);
-                error = true;
+                return;
             }
             //Response.Write("<script>alert('Error el nombre no puede ser vacio')</script>");
 
@@ -33,33 +32,29 @@ namespace ES_Eventos_Online
             if (!int.TryParse(NumCedulaInput.Text, out cedulaIn))
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error el numero de cedula no puede tener letras ni ser vacio');", true);
-                error = true;
+                return;
             }
 
             String emailIn = correoElectronicoInput.Text;
             if (emailIn == "" || emailIn == null)
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error el correo electronico no puede ser vacio');", true);
-                error = true;
+                return;
             }
 
             String userNameIn = UsernameInput.Text;
             if (userNameIn == "" || userNameIn == null)
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error el usuario no puede ser vacio');", true);
-                error = true;
+                return;
             }
 
             String passwordIn = ContrasennaInput.Text;
             if (passwordIn == "" || passwordIn == null)
             {
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error la contraseña no puede ser vacio');", true);
-                error = true;
-            }
-
-
-            if (error)
                 return;
+            }
 
             // Esto tiene mis configuraciones para conectarse a mi base de datos tienen que cambiarla para probarla ustedes
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-RSCO601\\SQLEXPRESS;Initial Catalog=ESEventosOnline;Integrated Security=True");

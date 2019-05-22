@@ -5,12 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Inicio sesion</title>
-    <style type="text/css">
-        .auto-style1 {
-            width: 170px;
-        }
-    </style>
-</head>
+    </head>
 <body style="background-color: #34495e;height:auto;font-family: 'Roboto Medium'">
     <form id="LoginForm" runat="server" style="text-align:center">
         <div style="margin-top:60px;margin-bottom:50px">
@@ -20,14 +15,14 @@
         <div">
             <asp:Label ID="usernameLbl" runat="server" Text="Nombre de usuario" style="margin-bottom:10px;font-family: 'Roboto Medium'; font-size: 40px;color: #FFFFFF;display:inline-block"></asp:Label>
             <br />
-                <asp:TextBox ID="TextBox1" runat="server" Width="170px" Height="20px"></asp:TextBox>
+                <asp:TextBox ID="userNameInput" runat="server" Width="170px" Height="20px"></asp:TextBox>
             <br />
             <br />
              <asp:Label ID="passwordLbl" runat="server" Text="Contraseña" style="margin-bottom:10px; font-family:'Roboto Medium'; font-size: 40px;text-align:center ;color: #FFFFFF;display:inline-block"></asp:Label>
             <br />
-                <input id="passwordInput" type="password" style="border:solid;border-width:1px;border-color:white;height:20px;margin-bottom:30px;width:170px" />
-            <br />
-                <asp:Button ID="loginBtn" runat="server" Text="Ingresar" BorderStyle="Solid" style="margin-bottom:30px;width:180px" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238"/>
+                <asp:TextBox ID="passwordInput" TextMode="Password" runat="server" Width="166px"></asp:TextBox>
+&nbsp;<br />
+                <asp:Button ID="loginBtn" runat="server" Text="Ingresar" BorderStyle="Solid" style="margin-bottom:30px;width:180px" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238" OnClick="loginBtn_Click"/>
             <br />
             <asp:HyperLink runat="server" ID="createAccountLink" Text="Crear cuenta" Font-Underline="True" Font-Size="20px" ForeColor="#2ECC71" NavigateUrl="~/RegisterForm.aspx"></asp:HyperLink>
         </div>
