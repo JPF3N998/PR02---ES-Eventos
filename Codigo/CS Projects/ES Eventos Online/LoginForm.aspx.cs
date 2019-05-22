@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -15,6 +16,27 @@ namespace ES_Eventos_Online
         protected void Page_Load(object sender, EventArgs e)
         {
             
+        }
+
+        protected void pruebaEmails() {
+            // Prep
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            // Cuerpo, etc
+            mail.From = new MailAddress("iruda2559@gmail.com");
+            mail.To.Add("torres.and1313@hotmail.com");
+            mail.Subject = "Test Mail";
+            mail.Body = "This is for testing SMTP mail from GMAIL";
+
+            // Setup
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("iruda2559", "JajaSalu2");
+            SmtpServer.EnableSsl = true;
+
+            // Envio
+            SmtpServer.Send(mail);
+
         }
 
         protected void loginBtn_Click(object sender, EventArgs e)
