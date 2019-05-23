@@ -10,7 +10,7 @@
 <body style="height:auto">
     <form id="AdministradorRecursos" runat="server" style="height:auto">
          <div style="margin-bottom:5px;text-align:left">
-            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Resources/sharp_arrow_back_white_36dp.png" ForeColor="White"/>
+            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Resources/sharp_arrow_back_white_36dp.png" ForeColor="White" OnClick="ImageButton1_Click"/>
             <h1 id="adminLbl" style="font-size: 72px;color: #FFFFFF; text-decoration: underline; font-weight: bolder;margin-left:20px">Administrador</h1> 
             <h2 id="recursosLbl" style="font-size: 50px;color: #FFFFFF; font-weight: bolder;margin-left:20px">Recursos</h2>
             <h3 id="searchLbl" style="font-size: 50px;color: #FFFFFF; font-weight: bolder;margin-left:20px">Buscar</h3> 

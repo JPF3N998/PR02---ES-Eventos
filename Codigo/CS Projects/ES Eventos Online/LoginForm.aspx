@@ -15,7 +15,7 @@
         <div">
             <asp:Label ID="usernameLbl" runat="server" Text="Nombre de usuario" style="margin-bottom:10px;font-family: 'Roboto Medium'; font-size: 40px;color: #FFFFFF;display:inline-block"></asp:Label>
             <br />
-                <asp:TextBox ID="userNameInput" runat="server" Width="170px" Height="20px"></asp:TextBox>
+                <asp:TextBox ID="userNameInput" runat="server" Width="170px" Height="20px" AutoCompleteType="Disabled"></asp:TextBox>
             <br />
             <br />
              <asp:Label ID="passwordLbl" runat="server" Text="Contraseña" style="margin-bottom:10px; font-family:'Roboto Medium'; font-size: 40px;text-align:center ;color: #FFFFFF;display:inline-block"></asp:Label>
@@ -27,9 +27,7 @@
             <asp:HyperLink runat="server" ID="createAccountLink" Text="Crear cuenta" Font-Underline="True" Font-Size="20px" ForeColor="#2ECC71" NavigateUrl="~/RegisterForm.aspx"></asp:HyperLink>
         </div>
         <div id="testDiv">
-            <asp:HyperLink runat="server" ID="clientePortal" Text="Portal cliente" Font-Underline="True" Font-Size="20px" ForeColor="#2ECC71" NavigateUrl="~/RegisterForm.aspx"></asp:HyperLink>
                <br />
-            <asp:HyperLink runat="server" ID="adminPortal" Text="Porta administrador" Font-Underline="True" Font-Size="20px" ForeColor="#2ECC71" NavigateUrl="~/AdministradorPortal.aspx"></asp:HyperLink>
        
         </div>
     </form>

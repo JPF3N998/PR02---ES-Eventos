@@ -13,5 +13,15 @@ namespace ES_Eventos_Online
         {
 
         }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("LoginForm.aspx");
+        }
+
+        protected void registerAdminBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("RegisterAdminForm.aspx");
+        }
     }
 }

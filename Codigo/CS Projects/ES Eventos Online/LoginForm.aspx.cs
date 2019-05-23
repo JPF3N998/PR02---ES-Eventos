@@ -12,7 +12,7 @@ namespace ES_Eventos_Online
 {
     public partial class LoginForm : System.Web.UI.Page
     {
-        string server = Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
+        string server = "Data Source=" + Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
             

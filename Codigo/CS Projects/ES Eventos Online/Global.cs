@@ -9,6 +9,6 @@ namespace ES_Eventos_Online
     public static class Global
     {
         // Esta es la variable del cliente comentar y cambiar por el nombre del server de ustedes para que todo funcione
-        public static String configServerName = "Data Source=DESKTOP-RSCO601\\SQLEXPRESS";
+        public static String configServerName = "DESKTOP-RSCO601\\SQLEXPRESS";
     }
 }

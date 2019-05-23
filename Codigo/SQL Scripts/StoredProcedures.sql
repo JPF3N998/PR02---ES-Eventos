@@ -127,6 +127,11 @@ CREATE PROC spLogin @nombreUsuarioInput char(50), @passwordInput char(50) AS
 						RETURN @isAdmin;
 						END
 				END
+			ELSE
+				BEGIN
+				SET @isAdmin = -1;
+				RETURN @isAdmin;
+				END
 			END
 		ELSE
 			SET @isAdmin = -1;
@@ -378,6 +383,40 @@ BEGIN
 	END CATCH 
 END 
 GO
+
+DROP PROC IF EXISTS spAgregarAdmin
+GO 
+ 
+CREATE PROC spAgregarAdmin @nombreIn nvarchar(50), @cedulaIn int, @emailIn nvarchar(50), @userNameIn nvarchar(50), @passwordIn nvarchar(50) AS 
+BEGIN 
+	DECLARE @result int; 
+	BEGIN TRY 
+		if Exists(SELECT * FROM dbo.Usuario AS U WHERE U.username = @userNameIn) 
+			BEGIN 
+			PRINT('Usuario '+@userNameIn+' ya existe.')
+			SET @result = -1; 
+			RETURN @result; 
+			END 
+		IF @@TRANCOUNT = 0 
+			BEGIN 
+			SET TRANSACTION ISOLATION LEVEL READ COMMITTED 
+			BEGIN TRANSACTION 
+			END 
+		INSERT INTO dbo.Usuario	VALUES (@nombreIn, @cedulaIn, @emailIn, @userNameIn, @passwordIn, 1); 
+		IF @@TRANCOUNT > 0 
+			COMMIT; 
+		SET @result = 1; 
+		RETURN @result; 
+	END TRY 
+	BEGIN CATCH 
+		IF @@TRANCOUNT > 0 
+			ROLLBACK; 
+		SET @result = -1; 
+		RETURN @result; 
+	END CATCH 
+END 
+GO
+
 
 DROP PROC IF EXISTS spGetPrecioDelPaquete
 GO

@@ -13,5 +13,10 @@ namespace ES_Eventos_Online
         {
 
         }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("AdministradorPortal.aspx");
+        }
     }
 }
