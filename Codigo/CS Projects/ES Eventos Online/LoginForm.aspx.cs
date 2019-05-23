@@ -12,9 +12,8 @@ namespace ES_Eventos_Online
 {
     public partial class LoginForm : System.Web.UI.Page
     {
-<<<<<<< Updated upstream
+
         string server = "Data Source=" + Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
-=======
         static string andreyConString = Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
         static string fengConString = ConfigurationManager.ConnectionStrings["fengConnectionString"].ConnectionString;
         static SqlConnection feng =new SqlConnection(fengConString);
@@ -23,7 +22,6 @@ namespace ES_Eventos_Online
         //Cambiar aqui segun quien lo este usando
         SqlConnection con;
 
->>>>>>> Stashed changes
         protected void Page_Load(object sender, EventArgs e)
         {
            con = feng;
