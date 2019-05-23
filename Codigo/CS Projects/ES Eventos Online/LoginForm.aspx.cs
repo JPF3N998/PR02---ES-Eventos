@@ -7,15 +7,26 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using System.Configuration;
 namespace ES_Eventos_Online
 {
     public partial class LoginForm : System.Web.UI.Page
     {
+<<<<<<< Updated upstream
         string server = "Data Source=" + Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
+=======
+        static string andreyConString = Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
+        static string fengConString = ConfigurationManager.ConnectionStrings["fengConnectionString"].ConnectionString;
+        static SqlConnection feng =new SqlConnection(fengConString);
+        SqlConnection andrey = new SqlConnection(andreyConString);
+
+        //Cambiar aqui segun quien lo este usando
+        SqlConnection con;
+
+>>>>>>> Stashed changes
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+           con = feng;
         }
 
         protected void pruebaEmails() {
@@ -56,9 +67,8 @@ namespace ES_Eventos_Online
                 return;
             }
 
-
             // Se empieza la conexion a la base de datos para encontrar la cuenta
-            SqlConnection con = new SqlConnection(server);
+            
             SqlCommand cmd = new SqlCommand("spLogin", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
