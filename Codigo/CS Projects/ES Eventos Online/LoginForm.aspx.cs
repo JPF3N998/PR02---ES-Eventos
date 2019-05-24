@@ -1,30 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Net.Mail;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Configuration;
 namespace ES_Eventos_Online
 {
     public partial class LoginForm : System.Web.UI.Page
     {
 
         string server = "Data Source=" + Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
-        static string andreyConString = Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
-        static string fengConString = ConfigurationManager.ConnectionStrings["fengConnectionString"].ConnectionString;
-        static SqlConnection feng =new SqlConnection(fengConString);
-        SqlConnection andrey = new SqlConnection(andreyConString);
+        public static string andreyConString = Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
+        public  static string fengConString = ConfigurationManager.ConnectionStrings["fengConnectionString"].ConnectionString;
+        public static SqlConnection feng =new SqlConnection(fengConString);
+        public static SqlConnection andrey = new SqlConnection(andreyConString);
 
         //Cambiar aqui segun quien lo este usando
-        SqlConnection con;
+        public static SqlConnection con;
 
         protected void Page_Load(object sender, EventArgs e)
         {
            con = feng;
+           Session["connectionString"] = fengConString;
         }
 
         protected void pruebaEmails() {
@@ -45,7 +41,6 @@ namespace ES_Eventos_Online
 
             // Envio
             SmtpServer.Send(mail);
-
         }
 
         protected void loginBtn_Click(object sender, EventArgs e)
@@ -61,11 +56,10 @@ namespace ES_Eventos_Online
             string password = passwordInput.Text;
             if (password == "" || password == null)
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error la contraseña no puede ser vacia');", true);
+                MessageBox.Show("Error la contraseña no puede ser vacia");
                 return;
             }
 
-            // Se empieza la conexion a la base de datos para encontrar la cuenta
             
             SqlCommand cmd = new SqlCommand("spLogin", con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -84,15 +78,19 @@ namespace ES_Eventos_Online
 
             // No dejar la conexion abierta
             con.Close();
-
             // Se redirecciona de acuerdo al tipo de cuenta que se haya encontrado ADMIN o CLIENTE
             if (returnValue == 1)
+            {
+                Session["user"] = "admin";
                 Response.Redirect("AdministradorPortal.aspx");
+            }
             else if (returnValue == 0)
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('La cuenta del cliente fue encontrada');", true);
+            {
+                Session["user"] = userName;
+                Response.Redirect("ClientePortal.aspx");
+            }
             else
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('La cuenta no fue encontrada, verifique sus credenciales');", true);
-
+                MessageBox.Show("La cuenta no fue encontrada, verifique sus credenciales");
         }
     }
 }

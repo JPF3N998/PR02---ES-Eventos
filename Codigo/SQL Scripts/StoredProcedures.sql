@@ -181,16 +181,13 @@ GO
 DROP PROC IF EXISTS spGetPaquetes
 GO
 
-CREATE PROC spGetPaquetes @idRecurso INT AS
+CREATE PROC spGetPaquetes AS
 	BEGIN
-		DECLARE @existeRecurso BIT;
-		EXEC spBuscarRegistro @input=@idRecurso,@mode= 2,@existe = @existeRecurso;
-		IF @existeRecurso = 1
-			BEGIN
-				SELECT P.id as [Paquete] FROM Paquete P WHERE @idRecurso = P.idRecurso
-			END
+		SELECT Pr.idPaquete, SUM(Pr.precio) AS [Precio] FROM (Paquete P JOIN Producto Pr ON P.id=Pr.idPaquete) GROUP BY Pr.idPaquete 
 	END
 GO
+
+EXEC spGetPaquetes
 
 DROP PROC IF EXISTS spAgregarRecurso
 GO
@@ -437,15 +434,16 @@ CREATE PROC spGetPrecioDelPaquete @idPaquete INT,@precio FLOAT OUTPUT AS
 	END
 GO
 
-DROP PROC IF EXISTS spReservar
+DROP PROC spReservar
 GO
 /*Se usa el username para la reservacion del paquete*/
-CREATE PROC spReservar @username NVARCHAR(50),@idPaquete INT,@fecha NVARCHAR(50),@horaInicio NVARCHAR(20),@horaFin NVARCHAR(20) AS
+CREATE PROC spReservar @username NVARCHAR(50),@idPaquete INT,@fecha NVARCHAR(50),@horaInicio NVARCHAR(20),@horaFin NVARCHAR(20),@exito BIT OUTPUT AS
 	BEGIN
 		DECLARE @idCliente INT = (SELECT U.id FROM Usuario U WHERE U.username = @username);
 		IF @idCliente IS NULL
 			BEGIN
 				PRINT('Cliente no pudo ser encontrado')
+				SET @exito = -1;
 				RETURN -1;
 			END
 		ELSE
@@ -465,8 +463,8 @@ CREATE PROC spReservar @username NVARCHAR(50),@idPaquete INT,@fecha NVARCHAR(50)
 				SELECT * FROM @horariosDelPaquete
 				IF EXISTS (SELECT * FROM @horariosDelPaquete)
 					BEGIN
-						PRINT('Hay choque de horarios')
-			
+						PRINT('Hay choque de horarios');
+						SET @exito = -1;
 						RETURN -1
 					END
 				ELSE
@@ -481,15 +479,155 @@ CREATE PROC spReservar @username NVARCHAR(50),@idPaquete INT,@fecha NVARCHAR(50)
 							VALUES (@idCliente,@idPaquete,@fechaDATE,@horaInicioTIME,@horaFinTIME,@precioDeLaReservacion)
 						COMMIT
 						PRINT('Reservacion establecida')
+						SET @exito = 0;
 						RETURN 0;
 					END TRY
 					BEGIN CATCH
 						PRINT('Error en la transaccion a la hora de registrar reservacion');
+						SET @exito = -1;
 						RETURN -1;
 					END CATCH
 			END
 	END
 GO
+
+DROP PROC IF EXISTS spVerReservaciones
+GO
+
+CREATE PROC spVerReservaciones @username NVARCHAR(50) AS
+	BEGIN
+		DECLARE @idCliente INT = (SELECT U.id FROM Usuario U WHERE U.username = @username)
+		IF @idCliente IS NOT NULL
+			BEGIN
+				DECLARE @admin BIT = (SELECT U.admin FROM Usuario U WHERE @idCliente = U.id);
+				IF @admin = 1
+					BEGIN
+						PRINT('Es admin')
+						SELECT R.id as [ID Reservacion],R.idPaquete AS [ID Paquete],Re.nombre as [Recurso], CONVERT(NVARCHAR(12),R.fecha) as [Fecha de reservacion],R.horaInicio AS [Hora de inicio],R.horaFin AS [Hora de fin],R.precioTotal FROM Reservacion R JOIN (Paquete P JOIN Recurso Re ON P.idRecurso = Re.id) ON P.id = R.idPaquete ORDER BY P.idRecurso
+					END
+				ELSE
+					BEGIN
+						SELECT R.id as [ID Reservacion],R.idPaquete AS [ID Paquete],Re.nombre as [Recurso], CONVERT(NVARCHAR(12),R.fecha) as [Fecha de reservacion],R.horaInicio AS [Hora de inicio],R.horaFin AS [Hora de fin],R.precioTotal FROM Reservacion R JOIN (Paquete P JOIN Recurso Re ON P.idRecurso = Re.id) ON P.id = R.idPaquete WHERE R.idCliente = @idCliente ORDER BY P.idRecurso
+					END
+				END
+		ELSE
+			BEGIN
+				PRINT('Usuario '+ @username + ' no existe')
+				RETURN -1
+			END
+	END
+GO
+
+DROP PROC IF EXISTS spFiltrarReservaciones
+GO
+
+CREATE PROC spFiltrarReservaciones @username NVARCHAR(50),@nombreRecurso NVARCHAR(50) AS
+	BEGIN
+		DECLARE @idCliente INT = (SELECT U.id FROM Usuario U WHERE U.username = @username)
+		IF @idCliente IS NOT NULL
+			BEGIN
+				DECLARE @admin BIT = (SELECT U.admin FROM Usuario U WHERE @idCliente = U.id);
+				IF @admin = 1
+					BEGIN
+						PRINT('Es admin')
+						SELECT R.id as [ID Reservacion],Re.nombre as [Nombre del recurso],R.idPaquete AS [ID Paquete], CONVERT(NVARCHAR(12),R.fecha) as [Fecha de reservacion],R.horaInicio AS [Hora de inicio],R.horaFin AS [Hora de fin],R.precioTotal FROM Reservacion R JOIN (Paquete P JOIN Recurso Re ON P.idRecurso = Re.id) ON P.id = R.idPaquete WHERE R.idCliente = @idCliente AND Re.nombre LIKE @nombreRecurso ORDER BY P.idRecurso
+					END
+				ELSE
+					BEGIN
+						SELECT R.id as [ID Reservacion],Re.nombre as [Nombre del recurso],R.idPaquete AS [ID Paquete], CONVERT(NVARCHAR(12),R.fecha) as [Fecha de reservacion],R.horaInicio AS [Hora de inicio],R.horaFin AS [Hora de fin],R.precioTotal FROM Reservacion R JOIN (Paquete P JOIN Recurso Re ON P.idRecurso = Re.id) ON P.id = R.idPaquete WHERE R.idCliente = @idCliente AND Re.nombre LIKE @nombreRecurso ORDER BY P.idRecurso
+					END
+				END
+		ELSE
+			BEGIN
+				PRINT('Usuario '+ @username + ' no existe')
+				RETURN -1
+			END
+	END
+GO
+
+DROP PROC IF EXISTS spVerFacturas
+GO
+
+CREATE PROC spVerFacturas @username NVARCHAR(50) AS
+	BEGIN
+		DECLARE @idCliente INT = (SELECT U.id FROM Usuario U WHERE U.username = @username)
+		IF @idCliente IS NOT NULL
+			BEGIN
+				DECLARE @admin BIT = (SELECT U.admin FROM Usuario U WHERE @idCliente = U.id);
+				IF @admin = 1
+					BEGIN
+						PRINT('Es admin')
+						SELECT F.id as [ID de Factura],F.idCliente as [ID Cliente],F.idReservacion AS [ID Reservacion],CONVERT(NVARCHAR(12),F.fecha) as [Fecha de reservacion],F.horaInicio AS [Hora de inicio],F.horaFin AS [Hora de fin] FROM Factura F
+					END
+				ELSE
+					BEGIN
+						SELECT F.id as [ID de Factura],F.idCliente as [ID Cliente],F.idReservacion AS [ID Reservacion],CONVERT(NVARCHAR(12),F.fecha) as [Fecha de reservacion],F.horaInicio AS [Hora de inicio],F.horaFin AS [Hora de fin] FROM Factura F WHERE F.idCliente = @idCliente
+					END
+				END
+		ELSE
+			BEGIN
+				PRINT('Usuario '+ @username + ' no existe')
+				RETURN -1
+			END
+	END
+GO
+
+DROP PROC IF EXISTS spCancelarReservacion
+GO
+
+CREATE PROC spCancelarReservacion @username NVARCHAR(50),@idReservacion INT AS
+	BEGIN
+		DECLARE @idCliente INT = (SELECT U.id FROM Usuario U WHERE U.username = @username);
+		IF @idCliente IS NOT NULL
+			BEGIN
+				IF EXISTS (SELECT R.id FROM Reservacion R WHERE R.id = @idReservacion)
+					BEGIN
+						DECLARE @diaReservacion DATE = (SELECT R.fecha FROM Reservacion R WHERE R.id = @idReservacion) 
+						IF DATEDIFF(DAY,GETDATE(),@diaReservacion) < 7
+							BEGIN
+								PRINT('No se puede cancelar la reservacion, ya que hace falta menos de una semana')
+								RETURN -1
+							END
+						ELSE
+							BEGIN
+								BEGIN TRY
+									DECLARE @precioDeLaReservacion FLOAT;
+									DECLARE @idPaquete INT = (SELECT R.idPaquete FROM Reservacion R WHERE R.id = @idReservacion)
+									EXEC spGetPrecioDelPaquete @idPaquete,@precioDeLaReservacion OUTPUT;
+									SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+									BEGIN TRANSACTION
+										DELETE FROM Factura WHERE Factura.idReservacion = @idReservacion
+										DELETE FROM Reservacion WHERE Reservacion.id = @idReservacion
+
+									COMMIT
+									RETURN 0
+								END TRY
+								BEGIN CATCH
+									PRINT('Error en la cancelacion de la reservacion numero '+ CONVERT(NVARCHAR(50),@idReservacion))
+									declare @error int, @message varchar(4000), @xstate int;
+									select @error = ERROR_NUMBER(), @message = ERROR_MESSAGE(), @xstate = XACT_STATE();
+									raiserror ('Cancelacion de la reservacion: %d: %s', 16, 1, @error, @message) ;
+									ROLLBACK
+									RETURN -1
+								END CATCH
+							END
+					END
+				ELSE
+					BEGIN
+						PRINT('Reservacion numero: ' +@idReservacion+ ' no existe')
+						RETURN -1
+					END
+			END
+		ELSE
+			BEGIN
+				PRINT('Cliente '+@username+' no existe')
+				RETURN -1
+			END
+	END
+GO
+
+/*EXEC spCancelarReservacion 'admin',3*/
+
 
 /*
 EXEC spReservar 'admin',2,'20/05/2019','7:00','22:00'

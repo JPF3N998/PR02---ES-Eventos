@@ -70,6 +70,8 @@
     <Content Include="AdministradorPortal.aspx" />
     <Content Include="AdministradorPortalCSS.css" />
     <Content Include="AdministradorRecursos.aspx" />
+    <Content Include="ClientePortal.aspx" />
+    <Content Include="ClienteReservacionForm.aspx" />
     <Content Include="FormCSS.css" />
     <Content Include="LoginForm.aspx" />
     <Content Include="RegisterAdminForm.aspx" />
@@ -91,6 +93,20 @@
     </Compile>
     <Compile Include="AdministradorRecursos.aspx.designer.cs">
       <DependentUpon>AdministradorRecursos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientePortal.aspx.cs">
+      <DependentUpon>ClientePortal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientePortal.aspx.designer.cs">
+      <DependentUpon>ClientePortal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteReservacionForm.aspx.cs">
+      <DependentUpon>ClienteReservacionForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClienteReservacionForm.aspx.designer.cs">
+      <DependentUpon>ClienteReservacionForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="LoginForm.aspx.cs">
@@ -116,6 +132,7 @@
     <Compile Include="RegisterForm.aspx.designer.cs">
       <DependentUpon>RegisterForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Session.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

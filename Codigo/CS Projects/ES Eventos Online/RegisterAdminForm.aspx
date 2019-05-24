@@ -24,7 +24,7 @@
         </div>
         <div>
             <asp:Label ID="nombreLbl" runat="server" Text="Nombre" style="font-family: 'Roboto Medium'; font-size: 40px;color: #FFFFFF"></asp:Label>
-            <br />
+            <br/>
                 <asp:TextBox ID="nombreInput" runat="server" Width="170px" Height="20px" style="margin-bottom:20px" AutoCompleteType="Disabled"></asp:TextBox>
             <br />
                 <span class="auto-style1">Número de cédula</span><br />

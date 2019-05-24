@@ -20,7 +20,7 @@
             <br />
              <asp:Label ID="passwordLbl" runat="server" Text="Contraseña" style="margin-bottom:10px; font-family:'Roboto Medium'; font-size: 40px;text-align:center ;color: #FFFFFF;display:inline-block"></asp:Label>
             <br />
-                <asp:TextBox ID="passwordInput" TextMode="Password" runat="server" Width="166px"></asp:TextBox>
+                <asp:TextBox ID="passwordInput" TextMode="Password" runat="server" Width="166px" Style="margin-bottom:30px"></asp:TextBox>
 &nbsp;<br />
                 <asp:Button ID="loginBtn" runat="server" Text="Ingresar" BorderStyle="Solid" style="margin-bottom:30px;width:180px" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238" OnClick="loginBtn_Click"/>
             <br />

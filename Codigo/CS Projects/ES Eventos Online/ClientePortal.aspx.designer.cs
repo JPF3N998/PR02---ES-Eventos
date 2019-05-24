@@ -10,52 +10,43 @@
 namespace ES_Eventos_Online {
     
     
-    public partial class AdministradorPortalForm {
+    public partial class ClientePortal {
         
         /// <summary>
-        /// AdminPortal control.
+        /// ClientForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm AdminPortal;
+        protected global::System.Web.UI.HtmlControls.HtmlForm ClientForm;
         
         /// <summary>
-        /// ImageButton1 control.
+        /// backBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+        protected global::System.Web.UI.WebControls.ImageButton backBtn;
         
         /// <summary>
-        /// HyperLink1 control.
+        /// clientLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        protected global::System.Web.UI.WebControls.Label clientLbl;
         
         /// <summary>
-        /// resourcesBtn control.
+        /// reservacionesBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button resourcesBtn;
-        
-        /// <summary>
-        /// registerAdminBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button registerAdminBtn;
+        protected global::System.Web.UI.WebControls.Button reservacionesBtn;
         
         /// <summary>
         /// reservacionesLbl control.
@@ -67,22 +58,22 @@ namespace ES_Eventos_Online {
         protected global::System.Web.UI.WebControls.Label reservacionesLbl;
         
         /// <summary>
-        /// Label1 control.
+        /// RecursoLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label RecursoLbl;
         
         /// <summary>
-        /// filterReservacionesTextBox control.
+        /// inputNombreRecurso control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox filterReservacionesTextBox;
+        protected global::System.Web.UI.WebControls.TextBox inputNombreRecurso;
         
         /// <summary>
         /// filterBtn control.
@@ -94,13 +85,13 @@ namespace ES_Eventos_Online {
         protected global::System.Web.UI.WebControls.Button filterBtn;
         
         /// <summary>
-        /// reservacionesGridView control.
+        /// gridViewReservaciones control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView reservacionesGridView;
+        protected global::System.Web.UI.WebControls.GridView gridViewReservaciones;
         
         /// <summary>
         /// historyLbl control.

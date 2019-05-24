@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,10 +13,17 @@ namespace ES_Eventos_Online
     public partial class RegisterLogin : System.Web.UI.Page
     {
         string server = "Data Source=" + Global.configServerName + ";Initial Catalog=ESEventosOnline;Integrated Security=True";
+        static string andreyConString = Global.configServerName + ";Initial Catalog=ESEventosOnline;Integrated Security=True";
+        static string fengConString = ConfigurationManager.ConnectionStrings["fengConnectionString"].ConnectionString;
+        static SqlConnection feng = new SqlConnection(fengConString);
+        SqlConnection andrey = new SqlConnection(andreyConString);
+
+        //Cambiar aqui segun quien lo este usando
+        SqlConnection con;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            con = feng;
         }
 
         protected void signupBtn_Click(object sender, EventArgs e)
@@ -27,7 +35,7 @@ namespace ES_Eventos_Online
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error el nombre no puede ser vacio');", true);
                 return;
             }
-
+            
             int cedulaIn;
             if (!int.TryParse(NumCedulaInput.Text, out cedulaIn))
             {
@@ -57,7 +65,6 @@ namespace ES_Eventos_Online
             }
 
             // Se empieza la conexion a la base de datos para crear la cuenta
-            SqlConnection con = new SqlConnection(server);
             SqlCommand cmd = new SqlCommand("spAgregarCliente", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -84,10 +91,8 @@ namespace ES_Eventos_Online
             if (returnValue == -1)
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error la cuenta ya existe');", true);
             else
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('La cuenta fue creada');", true);
-
-
-
+                MessageBox.Show("Cuenta creada exitosamente");
+                Response.Redirect("LoginForm.aspx");
         }
 
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)

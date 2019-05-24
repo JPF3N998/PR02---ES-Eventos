@@ -11,12 +11,10 @@ namespace ES_Eventos_Online
 {
     public partial class RegisterAdminForm : System.Web.UI.Page
     {
-
-        string server = "Data Source=" + Global.configServerName + ";Initial Catalog=ESEventosOnline;Integrated Security=True";
-
+        SqlConnection con;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            con = new SqlConnection(Session["connectionString"].ToString());
         }
 
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
@@ -63,7 +61,6 @@ namespace ES_Eventos_Online
             }
 
             // Se empieza la conexion a la base de datos para crear la cuenta
-            SqlConnection con = new SqlConnection(server);
             SqlCommand cmd = new SqlCommand("spAgregarAdmin", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -91,6 +88,7 @@ namespace ES_Eventos_Online
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error la cuenta ya existe');", true);
             else
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('La cuenta fue creada');", true);
+            Response.Redirect("LoginForm.aspx");
         }
     }
 }

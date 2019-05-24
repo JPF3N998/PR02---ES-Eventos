@@ -98,6 +98,10 @@ CREATE PROC spRegisterAdmin AS
 				BEGIN TRANSACTION
 					INSERT INTO Usuario(nombre,cedula,correo,username,password,admin)
 					VALUES ('Administrador',12345,'f3n9b0t@gmail.com','admin','admin',1);
+					INSERT INTO Usuario(nombre,cedula,correo,username,password,admin)
+					VALUES ('feng',12345,'feng@gmail.com','feng','feng',0);
+					INSERT INTO Usuario(nombre,cedula,correo,username,password,admin)
+					VALUES ('andrey',12345,'andrey@gmail.com','andrey','andrey',0);
 				COMMIT
 			END
 	END
@@ -172,9 +176,23 @@ CREATE PROC spFillProductos AS
 			INSERT INTO Producto(idPaquete,nombre,precio)
 			VALUES (1,'El Cuartel', 500)
 			INSERT INTO Producto(idPaquete,nombre,precio)
+			VALUES (1,'Pilsen', 1500)
+			INSERT INTO Producto(idPaquete,nombre,precio)
+			VALUES (1,'Imperial', 1500)
+			
+			INSERT INTO Producto(idPaquete,nombre,precio)
 			VALUES (2,'La Concha', 1000)
 			INSERT INTO Producto(idPaquete,nombre,precio)
+			VALUES (2,'Pilsen', 1300)
+			INSERT INTO Producto(idPaquete,nombre,precio)
+			VALUES (2,'Imperial', 100)
+
+			INSERT INTO Producto(idPaquete,nombre,precio)
 			VALUES (3,'XCape', 1500)
+			INSERT INTO Producto(idPaquete,nombre,precio)
+			VALUES (3,'Te Frio', 1000)
+			INSERT INTO Producto(idPaquete,nombre,precio)
+			VALUES (3,'Jugo de naranja', 1000)
 
 			INSERT INTO Producto(idPaquete,nombre,precio)
 			VALUES (4,'Desayuno', 500)
@@ -206,9 +224,9 @@ GO
 CREATE PROC spFillReservacionesFacturas AS
 	BEGIN
 		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
-		VALUES (1,2,(CONVERT(DATE,'02/04/2019',103)),CONVERT(TIME,'14:00',108),CONVERT(TIME,'18:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
+		VALUES (2,1,(CONVERT(DATE,'18/05/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'2:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 1))
 		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
-		VALUES (1,1,(CONVERT(DATE,'02/04/2019',103)),CONVERT(TIME,'14:00',108),CONVERT(TIME,'18:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
+		VALUES (2,1,(CONVERT(DATE,'18/05/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'2:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 1))
 		
 		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
 		VALUES (1,2,(CONVERT(DATE,'20/05/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'21:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
@@ -219,7 +237,21 @@ CREATE PROC spFillReservacionesFacturas AS
 		VALUES (1,2,(CONVERT(DATE,'22/05/2019',103)),CONVERT(TIME,'8:00',108),CONVERT(TIME,'12:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
 		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
 		VALUES (1,3,(CONVERT(DATE,'22/05/2019',103)),CONVERT(TIME,'8:00',108),CONVERT(TIME,'12:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
+		
+		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
+		VALUES (1,12,(CONVERT(DATE,'07/05/2019',103)),CONVERT(TIME,'18:00',108),CONVERT(TIME,'21:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 12))
+		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
+		VALUES (1,4,(CONVERT(DATE,'07/05/2019',103)),CONVERT(TIME,'18:00',108),CONVERT(TIME,'21:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 12))
 	
+		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
+		VALUES (1,9,(CONVERT(DATE,'16/03/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'00:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 9))
+		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
+		VALUES (1,5,(CONVERT(DATE,'16/03/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'00:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 9))
+		
+		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
+		VALUES (1,7,(CONVERT(DATE,'01/05/2019',103)),CONVERT(TIME,'13:00',108),CONVERT(TIME,'15:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 7))
+		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
+		VALUES (1,6,(CONVERT(DATE,'01/05/2019',103)),CONVERT(TIME,'13:00',108),CONVERT(TIME,'15:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 7))
 	END
 GO
 

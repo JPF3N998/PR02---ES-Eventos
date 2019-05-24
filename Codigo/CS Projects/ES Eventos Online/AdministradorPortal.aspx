@@ -19,18 +19,17 @@
             <br />
             <asp:Button ID="registerAdminBtn" runat="server" Text="Registrar nuevo administrador" BorderStyle="Solid" style="margin-bottom:30px;width:auto" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238" OnClick="registerAdminBtn_Click"/>
             <br />
+        </div>
+        <div style="text-align:center;margin-bottom:50px">
+           <asp:Label ID="reservacionesLbl" runat="server" Text="Reservaciones" style="height:auto;width:initial" Font-Bold="true" Font-Size="72px" ForeColor="#FFFFFF"/>
+            <br/>
+            <asp:Label ID="Label1" runat="server" Text="Nombre" HorizontalContentAlignment="Center" style="color:white;font-size:25px;margin-right:10px"></asp:Label><asp:TextBox ID="filterReservacionesTextBox" runat="server" style="margin-right:20px" Height="23px" AutoCompleteType="Disabled"></asp:TextBox><asp:Button ID="filterBtn" runat="server" Text="Filtrar" Height="25px" OnClick="filterBtn_Click" />
+            <asp:GridView ID="reservacionesGridView" runat="server" style="background-color:antiquewhite;width:auto;margin-top:30px;margin-left:auto;margin-right:auto"></asp:GridView>
+        </div>
+        <div style="text-align:center;margin-bottom:50px">
            <asp:Label ID="historyLbl" runat="server" Text="Historial" style="height:auto;width:initial" Font-Bold="true" Font-Size="72px" ForeColor="#FFFFFF"/>
             <br />
-            <asp:DropDownList CssClass="DropDownList" ID="recursosDropdown" runat="server" ToolTip="Resource type">
-                <asp:ListItem Selected="True">Seleccione un tipo de recurso</asp:ListItem>
-                <asp:ListItem>Local</asp:ListItem>
-                <asp:ListItem>Catering</asp:ListItem>
-                <asp:ListItem>Musica</asp:ListItem>
-                <asp:ListItem>Decoracion</asp:ListItem>
-            </asp:DropDownList>
-        </div>
-        <div style="text-align:center">
-            <asp:GridView ID="adminGridView" runat="server" style="background-color:antiquewhite;width:auto;margin-left:60px;margin-right:60px"></asp:GridView>
+            <asp:GridView ID="historialGridView" runat="server" style="background-color:antiquewhite;width:auto;margin-top:20px;margin-left:auto;margin-right:auto"></asp:GridView>
         </div>
     </form>
 </body>
