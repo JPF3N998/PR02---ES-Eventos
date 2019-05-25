@@ -166,3 +166,59 @@ D:\Documents\Programming\GitRepos\PR02---ES-Eventos\Codigo\CS Projects\ES Evento
 D:\Documents\Programming\GitRepos\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.csproj.CopyComplete
 D:\Documents\Programming\GitRepos\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.dll
 D:\Documents\Programming\GitRepos\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.pdb
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\ES Eventos Online.dll.config
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\ES Eventos Online.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\ES Eventos Online.pdb
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csc.exe
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csc.exe.config
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csc.rsp
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csi.exe
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csi.exe.config
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csi.rsp
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.Managed.Core.targets
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.AppContext.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Collections.Immutable.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Console.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.Compression.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.FileSystem.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.Pipes.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Reflection.Metadata.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.AccessControl.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Claims.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Principal.Windows.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.ValueTuple.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Xml.XmlDocument.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Xml.XPath.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\vbc.exe
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\vbc.exe.config
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\vbc.rsp
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\VBCSCompiler.exe
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\VBCSCompiler.exe.config
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.csprojAssemblyReference.cache
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.csproj.CoreCompileInputs.cache
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.csproj.CopyComplete
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.dll
+D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.pdb

@@ -85,6 +85,15 @@ namespace ES_Eventos_Online {
         protected global::System.Web.UI.WebControls.TextBox inputFecha;
         
         /// <summary>
+        /// infoLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label infoLbl;
+        
+        /// <summary>
         /// horaInicioLbl control.
         /// </summary>
         /// <remarks>
@@ -128,6 +137,42 @@ namespace ES_Eventos_Online {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button reservarBtn;
+        
+        /// <summary>
+        /// lbl2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl2;
+        
+        /// <summary>
+        /// idReservacionLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label idReservacionLbl;
+        
+        /// <summary>
+        /// idReservacionInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox idReservacionInput;
+        
+        /// <summary>
+        /// cancelarBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cancelarBtn;
         
         /// <summary>
         /// reservacionesLbl control.

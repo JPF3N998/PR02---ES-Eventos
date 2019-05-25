@@ -11,7 +11,9 @@ namespace ES_Eventos_Online
         string server = "Data Source=" + Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
         public static string andreyConString = Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
         public  static string fengConString = ConfigurationManager.ConnectionStrings["fengConnectionString"].ConnectionString;
+        public static string fengDesktopConString = "Data Source=" + Global.fengDesktopServerName + ";Initial Catalog=ESEventosOnline;Integrated Security=True";
         public static SqlConnection feng =new SqlConnection(fengConString);
+        public static SqlConnection fengDesktop = new SqlConnection(fengDesktopConString);
         public static SqlConnection andrey = new SqlConnection(andreyConString);
 
         //Cambiar aqui segun quien lo este usando
@@ -19,7 +21,7 @@ namespace ES_Eventos_Online
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           con = feng;
+           con = fengDesktop;
            Session["connectionString"] = fengConString;
         }
 

@@ -73,5 +73,10 @@ namespace ES_Eventos_Online
                 }
             }
         }
+
+        protected void resourcesBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminRecursos.aspx");
+        }
     }
 }

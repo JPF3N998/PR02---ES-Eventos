@@ -10,7 +10,16 @@
 namespace ES_Eventos_Online {
     
     
-    public partial class AdministradorRecursos {
+    public partial class AdminRecursos {
+        
+        /// <summary>
+        /// adminRecursos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm adminRecursos;
         
         /// <summary>
         /// ImageButton1 control.
@@ -22,147 +31,147 @@ namespace ES_Eventos_Online {
         protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
         
         /// <summary>
-        /// recursosDropdown control.
+        /// newRecursoBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList recursosDropdown;
+        protected global::System.Web.UI.WebControls.Button newRecursoBtn;
         
         /// <summary>
-        /// idLbl control.
+        /// deleteRecursoBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label idLbl;
+        protected global::System.Web.UI.WebControls.Button deleteRecursoBtn;
         
         /// <summary>
-        /// numPaquete control.
+        /// newRecursoPart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox numPaquete;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl newRecursoPart;
         
         /// <summary>
-        /// warningLbl1 control.
+        /// nombreRecursoLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label warningLbl1;
+        protected global::System.Web.UI.WebControls.Label nombreRecursoLbl;
         
         /// <summary>
-        /// searchPaqueteBtn control.
+        /// nombreInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button searchPaqueteBtn;
+        protected global::System.Web.UI.WebControls.TextBox nombreInput;
         
         /// <summary>
-        /// warningLbl4 control.
+        /// correoLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label warningLbl4;
+        protected global::System.Web.UI.WebControls.Label correoLbl;
         
         /// <summary>
-        /// ModificarPaqueteBtn control.
+        /// correoInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ModificarPaqueteBtn;
+        protected global::System.Web.UI.WebControls.TextBox correoInput;
         
         /// <summary>
-        /// borrarPaqueteBtn control.
+        /// telefonoLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button borrarPaqueteBtn;
+        protected global::System.Web.UI.WebControls.Label telefonoLbl;
         
         /// <summary>
-        /// numProducto control.
+        /// telefonoInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label numProducto;
+        protected global::System.Web.UI.WebControls.TextBox telefonoInput;
         
         /// <summary>
-        /// idProductoInput control.
+        /// provinciaLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox idProductoInput;
+        protected global::System.Web.UI.WebControls.Label provinciaLbl;
         
         /// <summary>
-        /// warningLbl2 control.
+        /// provinciaInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label warningLbl2;
+        protected global::System.Web.UI.WebControls.TextBox provinciaInput;
         
         /// <summary>
-        /// buscarProductoBtn control.
+        /// addRercursoBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button buscarProductoBtn;
+        protected global::System.Web.UI.WebControls.Button addRercursoBtn;
         
         /// <summary>
-        /// warningLbl5 control.
+        /// deleteRecursoPart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label warningLbl5;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl deleteRecursoPart;
         
         /// <summary>
-        /// modificarProductoBtn control.
+        /// nameRecursoDelete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button modificarProductoBtn;
+        protected global::System.Web.UI.WebControls.Label nameRecursoDelete;
         
         /// <summary>
-        /// eliminarProductoBtn control.
+        /// recursoInputBorrar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button eliminarProductoBtn;
+        protected global::System.Web.UI.WebControls.TextBox recursoInputBorrar;
         
         /// <summary>
-        /// productGridView control.
+        /// borrarRecursoBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView productGridView;
+        protected global::System.Web.UI.WebControls.Button borrarRecursoBtn;
     }
 }

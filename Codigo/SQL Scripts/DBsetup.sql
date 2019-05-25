@@ -77,10 +77,6 @@ CREATE PROC spSetupBD AS
 			id INT PRIMARY KEY IDENTITY(1,1),
 			idCliente INT,
 			idReservacion INT,
-			fecha DATE,
-			horaInicio TIME,
-			horaFin TIME,
-			precioTotal FLOAT,
 			FOREIGN KEY (idCliente) REFERENCES Usuario(id),
 			FOREIGN KEY (idReservacion) REFERENCES Reservacion(id) 
 		);
@@ -225,33 +221,29 @@ CREATE PROC spFillReservacionesFacturas AS
 	BEGIN
 		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
 		VALUES (2,1,(CONVERT(DATE,'18/05/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'2:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 1))
-		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
-		VALUES (2,1,(CONVERT(DATE,'18/05/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'2:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 1))
-		
+		INSERT INTO Factura(idCliente,idReservacion)
+		VALUES (2,1)
 		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
 		VALUES (1,2,(CONVERT(DATE,'20/05/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'21:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
-		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
-		VALUES (1,2,(CONVERT(DATE,'20/05/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'21:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
-		
+		INSERT INTO Factura(idCliente,idReservacion)
+		VALUES (1,2)
 		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
 		VALUES (1,2,(CONVERT(DATE,'22/05/2019',103)),CONVERT(TIME,'8:00',108),CONVERT(TIME,'12:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
-		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
-		VALUES (1,3,(CONVERT(DATE,'22/05/2019',103)),CONVERT(TIME,'8:00',108),CONVERT(TIME,'12:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 2))
-		
+		INSERT INTO Factura(idCliente,idReservacion)
+		VALUES (1,3)
 		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
 		VALUES (1,12,(CONVERT(DATE,'07/05/2019',103)),CONVERT(TIME,'18:00',108),CONVERT(TIME,'21:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 12))
-		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
-		VALUES (1,4,(CONVERT(DATE,'07/05/2019',103)),CONVERT(TIME,'18:00',108),CONVERT(TIME,'21:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 12))
-	
+		INSERT INTO Factura(idCliente,idReservacion)
+		VALUES (1,4)
 		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
 		VALUES (1,9,(CONVERT(DATE,'16/03/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'00:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 9))
-		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
-		VALUES (1,5,(CONVERT(DATE,'16/03/2019',103)),CONVERT(TIME,'20:00',108),CONVERT(TIME,'00:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 9))
+		INSERT INTO Factura(idCliente,idReservacion)
+		VALUES (1,5)
 		
 		INSERT INTO Reservacion(idCliente,idPaquete,fecha,horaInicio,horaFin,precioTotal)
 		VALUES (1,7,(CONVERT(DATE,'01/05/2019',103)),CONVERT(TIME,'13:00',108),CONVERT(TIME,'15:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 7))
-		INSERT INTO Factura(idCliente,idReservacion,fecha,horaInicio,horaFin,precioTotal)
-		VALUES (1,6,(CONVERT(DATE,'01/05/2019',103)),CONVERT(TIME,'13:00',108),CONVERT(TIME,'15:00',108),(SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = 7))
+		INSERT INTO Factura(idCliente,idReservacion)
+		VALUES (1,6)
 	END
 GO
 

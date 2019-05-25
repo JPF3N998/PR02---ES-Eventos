@@ -20,15 +20,27 @@
             <asp:TextBox ID="idPaqueteInput" runat="server" AutoCompleteType="Disabled" Height="25px" style="margin-top:30px"></asp:TextBox>
             <br/>
             <asp:Label ID="fechaLbl" runat="server" style="font-size:40px;margin-right:20px" Text="Fecha"></asp:Label>
-            <asp:TextBox ID="inputFecha" runat="server" AutoCompleteType="Disabled" Height="25px"></asp:TextBox>
+            <asp:TextBox ID="inputFecha" runat="server" AutoCompleteType="Disabled" Height="25px" ToolTip="Formato: dd/MM/yyyy" placeholder ="dd/MM/yyyy"></asp:TextBox>
             <br/>
+            <asp:Label ID="infoLbl" runat="server" Text="Horas en formato de 24 horas!" style="color:yellow"></asp:Label>
+            <br />
             <asp:Label ID="horaInicioLbl" runat="server" style="font-size:40px;margin-right:20px" Text="Hora de inicio"></asp:Label>
-            <asp:TextBox ID="inputHoraInicio" runat="server" AutoCompleteType="Disabled" Height="25px" ></asp:TextBox>
+            <asp:TextBox ID="inputHoraInicio" runat="server" AutoCompleteType="Disabled" Height="25px" ToolTip="Formato de 24 horas" placeholder="HH:mm"></asp:TextBox>
+
             <br/>
             <asp:Label ID="horaFinLbl" runat="server" style="font-size:40px;margin-right:20px" Text="Hora de fin"></asp:Label>
-            <asp:TextBox ID="horaFinInput" runat="server" AutoCompleteType="Disabled" Height="25px"></asp:TextBox>
+            <asp:TextBox ID="horaFinInput" runat="server" AutoCompleteType="Disabled" Height="25px" ToolTip="Formato de 24 horas" placeholder="HH:mm"></asp:TextBox>
             <br/>
             <asp:Button ID="reservarBtn" runat="server" Height="48px" Text="Reservar" style="margin-top:30px;margin-bottom:30px" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238" OnClick="reservarBtn_Click"/>
+        </div>
+        <div style="text-align:center">
+            <asp:Label ID="lbl2" runat="server" Text="Cancelacion de reservacion" style="height:auto;width:initial; margin-top:40px" Font-Bold="true" Font-Size="72px" ForeColor="#FFFFFF"/>
+            <br />
+            <asp:Label ID="idReservacionLbl" runat="server" style="font-size:40px;margin-right:20px;margin-top:30px" Text="ID de la reservacion"></asp:Label>
+            <asp:TextBox ID="idReservacionInput" runat="server" AutoCompleteType="Disabled" Height="25px" style="margin-top:30px"></asp:TextBox>
+            <br/>
+            
+            <asp:Button ID="cancelarBtn" runat="server" Height="48px" Text="Cancelar" style="margin-top:30px;margin-bottom:30px" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238" OnClick="cancelarBtn_Click"/>
         </div>
         <div style="text-align:center">
             <asp:Label ID="reservacionesLbl" runat="server" Text="Reservaciones" style="height:auto;width:initial" Font-Bold="true" Font-Size="72px" ForeColor="#FFFFFF"/>

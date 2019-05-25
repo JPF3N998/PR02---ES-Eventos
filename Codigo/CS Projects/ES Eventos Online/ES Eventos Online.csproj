@@ -69,7 +69,7 @@
   <ItemGroup>
     <Content Include="AdministradorPortal.aspx" />
     <Content Include="AdministradorPortalCSS.css" />
-    <Content Include="AdministradorRecursos.aspx" />
+    <Content Include="AdminRecursos.aspx" />
     <Content Include="ClientePortal.aspx" />
     <Content Include="ClienteReservacionForm.aspx" />
     <Content Include="FormCSS.css" />
@@ -87,12 +87,12 @@
     <Compile Include="AdministradorPortal.aspx.designer.cs">
       <DependentUpon>AdministradorPortal.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministradorRecursos.aspx.cs">
-      <DependentUpon>AdministradorRecursos.aspx</DependentUpon>
+    <Compile Include="AdminRecursos.aspx.cs">
+      <DependentUpon>AdminRecursos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdministradorRecursos.aspx.designer.cs">
-      <DependentUpon>AdministradorRecursos.aspx</DependentUpon>
+    <Compile Include="AdminRecursos.aspx.designer.cs">
+      <DependentUpon>AdminRecursos.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClientePortal.aspx.cs">
       <DependentUpon>ClientePortal.aspx</DependentUpon>

@@ -11,5 +11,6 @@ namespace ES_Eventos_Online
         // Esta es la variable del cliente comentar y cambiar por el nombre del server de ustedes para que todo funcione
         public static String configServerName = "Data Source=DESKTOP-RSCO601\\SQLEXPRESS";
         public static String fengServerName = "F3N9-ASUS2";
+        public static String fengDesktopServerName = "F3N9PC";
     }
 }
