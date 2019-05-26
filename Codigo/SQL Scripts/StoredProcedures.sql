@@ -148,7 +148,24 @@ CREATE PROC spVerHistorialAdmin @idRecurso INT AS
 		SELECT Re.nombre as [Recurso],Re.correo,Re.telefono,Re.provincia,F.idCliente AS [ID Cliente],R.fecha AS [Fecha],R.horaInicio AS [Hora Inicio],R.horaFin AS [Hora Fin],F.idReservacion AS [ID Reservacion],R.idPaquete AS [Paquete],R.precioTotal AS [Monto] FROM Factura F JOIN (Reservacion R JOIN (Paquete P JOIN Recurso Re ON P.idRecurso = Re.id) ON R.idPaquete = P.id) ON F.idReservacion = R.id
 	END
 GO
+DROP PROC IF EXISTS spGetPrecioDelPaquete
+GO
 
+CREATE PROC spGetPrecioDelPaquete @idPaquete INT,@precio FLOAT OUTPUT AS
+	BEGIN
+		IF EXISTS (SELECT P.id FROM Paquete P WHERE P.id = @idPaquete)
+			BEGIN
+				SET @precio = (SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = @idPaquete)
+				PRINT('Precio del paquete: '+CONVERT(NVARCHAR(50),@precio))
+				RETURN 0
+			END
+		ELSE
+			BEGIN
+				PRINT('Paquete '+CONVERT(NVARCHAR(50),@idPaquete)+' no existe')
+				RETURN -1
+			END
+	END
+GO
 DROP PROC IF EXISTS spGetIDFromUsername
 GO
 /*Devuelve en la variable output la llave primaria con el username como input*/
@@ -192,22 +209,41 @@ GO
 
 CREATE PROC spEliminarRecurso @nombreRecurso NVARCHAR(50) AS
 	BEGIN
-		DECLARE @idRecurso INT = (SELECT R.nombre FROM Recurso R WHERE R.nombre = @nombreRecurso)
+		DECLARE @idRecurso INT = (SELECT R.id FROM Recurso R WHERE R.nombre = @nombreRecurso)
 		IF @idRecurso IS NOT NULL
 			BEGIN
-				PRINT('Eliminando recurso: ' + @nombreRecurso)
 				
-				DECLARE @tempP TABLE(idRecurso INT,nombreRecurso NVARCHAR(50), idPaquete INT, idProducto INT, nombre NVARCHAR(50),precio FLOAT)
+				DECLARE @tempP TABLE(idRecurso INT,nombreRecurso NVARCHAR(50), idPaquete INT, idProducto INT, nombre NVARCHAR(50),precio FLOAT,idReservacion INT,idFactura INT)
+				INSERT INTO @tempP
+				SELECT R.id,R.nombre,P.id,Pr.id,Pr.nombre,Pr.precio,R.id,F.id FROM Recurso R
+				JOIN (Paquete P
+				JOIN Producto Pr ON P.id=Pr.idPaquete
+				LEFT JOIN (Reservacion Re JOIN Factura F ON F.idReservacion = Re.id) ON P.id=Re.idPaquete) ON R.id = P.idRecurso
+				WHERE R.id = @idRecurso
+				--SELECT * FROM @tempP
 				
-				INSERT INTO @tempP(idRecurso,nombreRecurso,idPaquete,idProducto,nombre,precio)
-				SELECT R.id,R.nombre,P.id,Pr.id,Pr.nombre,Pr.precio FROM Recurso R  JOIN (Paquete P JOIN Producto Pr ON P.id=Pr.idPaquete) ON R.id=P.idRecurso WHERE R.id = @idRecurso 
-				SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
-				BEGIN TRANSACTION
-					DELETE FROM Producto WHERE Producto.id = (SELECT TP.idProducto FROM @tempP TP WHERE Producto.id=TP.idProducto);
-					DELETE FROM Paquete WHERE Paquete.id = (SELECT TP.idPaquete FROM @tempP TP WHERE Paquete.id = TP.idPaquete);
-					DELETE FROM Recurso WHERE Recurso.id = @idRecurso;
-				COMMIT
-				RETURN 0
+				BEGIN TRY
+					SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+					BEGIN TRANSACTION
+						DELETE FROM Factura WHERE Factura.id = (SELECT TP.idFactura FROM @tempP TP WHERE TP.idFactura = Factura.id GROUP BY idFactura)
+						PRINT('Facturas: done')
+						DELETE FROM Producto WHERE Producto.id = (SELECT TP.idProducto FROM @tempP TP WHERE Producto.id=TP.idProducto GROUP BY idProducto);
+						PRINT('Productos: done')
+						DELETE FROM Reservacion WHERE Reservacion.idPaquete = (SELECT TP.idPaquete FROM @tempP TP WHERE Reservacion.idPaquete = TP.idPaquete GROUP BY TP.idPaquete);
+						PRINT('Reservaciones: done')
+						DELETE FROM Paquete WHERE Paquete.idRecurso = @idRecurso 
+						PRINT('Paquetes: done')
+						DELETE FROM Recurso WHERE Recurso.id = @idRecurso;
+						PRINT('Recurso: done')
+					COMMIT
+					PRINT('Recurso '+@nombreRecurso+ ' eliminado')
+					RETURN 0
+				END TRY
+				BEGIN CATCH
+					DECLARE @error NVARCHAR(200)= (SELECT 'Line '+CONVERT(NVARCHAR(100),ERROR_LINE())+' '+ERROR_MESSAGE() ) 
+					ROLLBACK
+					PRINT('Error: '+@error)
+				END CATCH
 			END
 		ELSE
 			BEGIN
@@ -227,31 +263,61 @@ CREATE PROC spEliminarPaquete @idPaquete INT AS
 		DECLARE @existePaquete BIT;
 		EXEC spBuscarPaquete @idPaquete,@existePaquete OUTPUT;
 		IF	@existePaquete = 1
-			BEGIN
-				PRINT('Eliminando paquete '+ @idPaquete + ' del recurso ' +@nombreRecurso)
+			BEGIN TRY
 				SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 				BEGIN TRANSACTION
+					DELETE FROM Factura WHERE Factura.idReservacion = (SELECT F.idReservacion FROM Factura F JOIN Reservacion R ON R.id=F.idReservacion WHERE R.idPaquete = @idPaquete GROUP BY F.idReservacion)
+					PRINT('Factura... Done')
+					DELETE FROM Reservacion WHERE Reservacion.id = (SELECT R.id FROM Reservacion R WHERE R.idPaquete = @idPaquete)
+					PRINT('Reservacion... Done')
 					DELETE FROM Producto WHERE Producto.idPaquete = @idPaquete 
+					PRINT('Producto... Done')
 					DELETE FROM Paquete WHERE Paquete.id = @idPaquete
+					PRINT('Paquete... Done')
 				COMMIT
+				--PRINT('Eliminado paquete '+ @idPaquete + ' del recurso ' +@nombreRecurso);
+				RETURN 0;
+			END TRY
+			BEGIN CATCH
+				ROLLBACK
+				RETURN -2;
+			END CATCH
+		ELSE
+			BEGIN
+				RETURN -1
 			END
 	END
 GO
 
 DROP PROC IF EXISTS spEliminarProducto
 GO
-/* spEliminarProducto usa como entrada la llave primaria del producto a borrar*/
-CREATE PROC spEliminarProducto @idProducto INT AS
+
+CREATE PROC spEliminarProducto @nombreProducto NVARCHAR(50) AS
 	BEGIN
-		SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
-		BEGIN TRANSACTION
-			DECLARE @producto NVARCHAR(50)= (SELECT P.nombre FROM Producto P WHERE P.id=@idProducto);
-			PRINT('Borrando producto: '+@producto);
-			DELETE FROM Producto WHERE Producto.id = @idProducto
-		COMMIT
+		DECLARE @idProducto INT = (SELECT Pr.id FROM Producto Pr WHERE Pr.nombre = @nombreProducto);
+		IF @idProducto IS NOT NULL
+			BEGIN
+				DECLARE @idPaquete INT = (SELECT P.id FROM Paquete P JOIN Producto Pr ON P.id = Pr.idPaquete WHERE Pr.id = @idProducto);
+				DECLARE @newPrice FLOAT;
+				EXEC spGetPrecioDelPaquete @idPaquete,@newPrice OUTPUT;
+				SET @newPrice = @newPrice - (SELECT Pr.precio FROM Producto Pr WHERE Pr.id = @idProducto)
+				SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+				BEGIN TRANSACTION
+
+					DELETE FROM Producto WHERE @idProducto = Producto.id
+					UPDATE Reservacion
+						SET Reservacion.precioTotal = @newPrice WHERE Reservacion.idPaquete = @idPaquete
+			
+				COMMIT
+				RETURN 0
+			END
+		ELSE
+			BEGIN
+				PRINT('No existe el producto '+ @nombreProducto)
+				RETURN -1
+			END
 	END
 GO
-
 DROP PROC IF EXISTS spAgregarRecurso
 GO
 
@@ -284,17 +350,17 @@ GO
 DROP PROC IF EXISTS spAgregarPaquete
 GO
 
-CREATE PROC spAgregarPaquete @idRecurso INT AS
+CREATE PROC spAgregarPaquete @nombreRecurso NVARCHAR(50) AS
 	BEGIN
-		DECLARE @existeRecurso BIT;
-		EXEC spBuscarRegistro @idRecurso,2,@existeRecurso OUTPUT;
-		IF @existeRecurso = 1
+		DECLARE @idRecurso INT=(SELECT R.id FROM Recurso R WHERE R.nombre = @nombreRecurso);
+		IF @idRecurso IS NOT NULL
 			BEGIN
 				SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 				BEGIN TRANSACTION
 					INSERT INTO Paquete(idRecurso)
 					VALUES (@idRecurso)
 				COMMIT
+				RETURN (SELECT max(id) FROM Paquete P);
 			END
 		ELSE
 			BEGIN
@@ -306,38 +372,28 @@ GO
 DROP PROC IF EXISTS spAgregarProducto
 GO
 
-CREATE PROC spAgregarProducto @idRecurso INT,@idPaquete INT,@nombreProducto NVARCHAR(50),@precioProducto FLOAT AS
+CREATE PROC spAgregarProducto @idPaquete INT,@nombreProducto NVARCHAR(50),@precioProducto FLOAT AS
 	BEGIN
-		DECLARE @existeRecurso BIT;
-		EXEC spBuscarRegistro @idRecurso,2,@existeRecurso OUTPUT;
-		IF @existeRecurso = 1
+		DECLARE @existePaquete BIT;
+		EXEC spBuscarPaquete @idPaquete,@existePaquete OUTPUT;
+		IF @existePaquete = 1
 			BEGIN
-				DECLARE @existePaquete BIT;
-				EXEC spBuscarPaquete @idPaquete,@existePaquete OUTPUT;
-				IF @existePaquete = 1
+				DECLARE @existeNombre NVARCHAR(50) = (SELECT P.nombre FROM Producto P WHERE P.nombre=@nombreProducto AND P.idPaquete=@idPaquete);
+				IF @existeNombre IS NULL
 					BEGIN
-						DECLARE @existeNombre NVARCHAR(50) = (SELECT P.nombre FROM Producto P WHERE P.nombre=@nombreProducto AND P.idPaquete=@idPaquete);
-						IF @existeNombre IS NULL
-							BEGIN
-							SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
-							BEGIN TRANSACTION
-								INSERT INTO Producto(idPaquete,nombre,precio)
-								VALUES(@idPaquete,@nombreProducto,@precioProducto)
-							COMMIT
-							DECLARE @nombreRecurso NVARCHAR(50) = (SELECT R.nombre FROM Recurso R WHERE R.id = @idRecurso);
-							PRINT('Agregando '+@nombreProducto+ ' en el paquete '+CONVERT(NVARCHAR(50),@idPaquete)+ ' del recurso '+@nombreRecurso);
-							END
-						ELSE
-							BEGIN
-								PRINT('Producto '+@nombreProducto+' ya existe en el paquete')
-								RETURN -1;
-							END
-						END
+					SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+					BEGIN TRANSACTION
+						INSERT INTO Producto(idPaquete,nombre,precio)
+						VALUES(@idPaquete,@nombreProducto,@precioProducto)
+					COMMIT
+					PRINT('Agregando '+@nombreProducto+ ' en el paquete '+CONVERT(NVARCHAR(50),@idPaquete));
+					END
 				ELSE
 					BEGIN
-						RETURN -1
+						PRINT('Producto '+@nombreProducto+' ya existe en el paquete')
+						RETURN -2;
 					END
-			END
+				END
 		ELSE
 			BEGIN
 				RETURN -1
@@ -412,26 +468,6 @@ BEGIN
 END 
 GO
 
-
-DROP PROC IF EXISTS spGetPrecioDelPaquete
-GO
-
-CREATE PROC spGetPrecioDelPaquete @idPaquete INT,@precio FLOAT OUTPUT AS
-	BEGIN
-		IF EXISTS (SELECT P.id FROM Paquete P WHERE P.id = @idPaquete)
-			BEGIN
-				SET @precio = (SELECT SUM(P.precio) FROM Producto P WHERE P.idPaquete = @idPaquete)
-				PRINT('Precio del paquete: '+CONVERT(NVARCHAR(50),@precio))
-				RETURN 0
-			END
-		ELSE
-			BEGIN
-				PRINT('Paquete '+CONVERT(NVARCHAR(50),@idPaquete)+' no existe')
-				RETURN -1
-			END
-	END
-GO
-
 DROP PROC IF EXISTS spReservar
 GO
 /*Se usa el username para la reservacion del paquete*/
@@ -496,6 +532,7 @@ CREATE PROC spReservar @usuario NVARCHAR(50),@idPaquete INT,@fecha NVARCHAR(50),
 				END
 	END
 GO
+
 /*
 SELECT * FROM Paquete
 SELECT * FROM Reservacion

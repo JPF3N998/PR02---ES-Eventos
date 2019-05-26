@@ -12,6 +12,15 @@ namespace ES_Eventos_Online
     {
         private static Hashtable m_executingPages = new Hashtable();
         private MessageBox() { }
+        public static void DatosMalos()
+        {
+            Show("Dato ingresado invalido");
+        }
+
+        public static void CamposVacios()
+        {
+            Show("Hay campos vacios");
+        }
         public static void Show(string sMessage)
         {
             // If this is the first time a page has called this method then

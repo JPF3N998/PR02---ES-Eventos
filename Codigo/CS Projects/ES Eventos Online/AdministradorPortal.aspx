@@ -12,7 +12,6 @@
         <div style="margin-bottom:50px;text-align:left">
             <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Resources/sharp_arrow_back_white_36dp.png" ForeColor="White" OnClick="ImageButton1_Click"/>
             <h1 id="adminLbl" style="font-size: 72px;color: #FFFFFF; text-decoration: underline; font-weight: bolder;margin-left:20px">Administrador</h1>
-            <asp:HyperLink runat="server" ID="HyperLink1" Text="Resource MGMT" Font-Underline="True" Font-Size="20px" ForeColor="#2ECC71" NavigateUrl="~/AdministradorRecursos.aspx"></asp:HyperLink>
         </div>
         <div style="text-align:center;margin-bottom:50px">
            <asp:Button ID="resourcesBtn" runat="server" Text="Gestionar recursos" BorderStyle="Solid" style="margin-bottom:30px;" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238" Width="866px" OnClick="resourcesBtn_Click"/>
