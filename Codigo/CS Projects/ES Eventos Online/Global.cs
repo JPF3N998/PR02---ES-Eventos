@@ -12,5 +12,6 @@ namespace ES_Eventos_Online
         public static String configServerName = "Data Source=DESKTOP-RSCO601\\SQLEXPRESS";
         public static String fengServerName = "F3N9-ASUS2";
         public static String fengDesktopServerName = "F3N9PC";
+        public static String carlosServerName = "RANZACADO-PC";
     }
 }

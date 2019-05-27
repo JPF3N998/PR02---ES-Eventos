@@ -14,7 +14,7 @@ namespace ES_Eventos_Online
         SqlConnection con;
         protected void Page_Load(object sender, EventArgs e)
         {
-            con = new SqlConnection(Session["connectionString"].ToString());
+            con = LoginForm.con;
         }
 
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
