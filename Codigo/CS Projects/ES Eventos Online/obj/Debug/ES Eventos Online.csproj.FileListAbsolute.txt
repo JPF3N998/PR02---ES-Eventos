@@ -222,3 +222,59 @@ D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Evento
 D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.csproj.CopyComplete
 D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.dll
 D:\Documents\Programming\GitRepos\PR02 - ES Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.pdb
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\ES Eventos Online.dll.config
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\ES Eventos Online.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\ES Eventos Online.pdb
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csc.exe
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csc.exe.config
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csc.rsp
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csi.exe
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csi.exe.config
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\csi.rsp
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.AppContext.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Console.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.Compression.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.IO.Pipes.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Claims.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.ValueTuple.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Xml.XPath.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\vbc.exe
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\vbc.exe.config
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\vbc.rsp
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\VBCSCompiler.exe
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.csprojAssemblyReference.cache
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.csproj.CoreCompileInputs.cache
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.csproj.CopyComplete
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.dll
+C:\Users\carlo\Documents\U\2019 - 1 (5)\Reque\Proyecto 2\Codigo\PR02---ES-Eventos\Codigo\CS Projects\ES Eventos Online\obj\Debug\ES Eventos Online.pdb

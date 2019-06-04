@@ -10,7 +10,6 @@ namespace ES_Eventos_Online
 
         string server = "Data Source=" + Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
 
-        public static string andreyConString = Global.configServerName+";Initial Catalog=ESEventosOnline;Integrated Security=True";
         public  static string fengConString = ConfigurationManager.ConnectionStrings["fengConnectionString"].ConnectionString;
         public static string fengDesktopConString = "Data Source=" + Global.fengDesktopServerName + ";Initial Catalog=ESEventosOnline;Integrated Security=True";
 
@@ -18,14 +17,13 @@ namespace ES_Eventos_Online
 
         public static SqlConnection feng =new SqlConnection(fengConString);
         public static SqlConnection fengDesktop = new SqlConnection(fengDesktopConString);
-        public static SqlConnection andrey = new SqlConnection(andreyConString);
         public static SqlConnection carlos = new SqlConnection(carlosConString);
         //Cambiar aqui segun quien lo este usando
         public static SqlConnection con;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           con = fengDesktop;
+           con = carlos;
            Session["connectionString"] = fengConString;
         }
 
@@ -36,7 +34,7 @@ namespace ES_Eventos_Online
 
             // Cuerpo, etc
             mail.From = new MailAddress("iruda2559@gmail.com");
-            mail.To.Add("torres.and1313@hotmail.com");
+            mail.To.Add("carlosrem70@gmail.com"); //mail.To.Add("torres.and1313@hotmail.com");
             mail.Subject = "Test Mail";
             mail.Body = "This is for testing SMTP mail from GMAIL";
 
@@ -52,6 +50,7 @@ namespace ES_Eventos_Online
         protected void loginBtn_Click(object sender, EventArgs e)
         {
             // Validaciones de todos los datos para mantener la integridad de la base de datos
+            //pruebaEmails();
             string userName = userNameInput.Text;
             if (userName == "" || userName == null)
             {

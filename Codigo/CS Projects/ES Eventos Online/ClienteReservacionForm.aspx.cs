@@ -91,7 +91,7 @@ namespace ES_Eventos_Online
 
             if (idPaqueteGot =="" | fechaGot=="" |horaInicioGot=="" | horaFinGot=="")
             {
-                MessageBox.Show("Hay campos vacios");
+                MessageBox.CamposVacios();
             }
             else
             {
@@ -123,7 +123,7 @@ namespace ES_Eventos_Online
                     }
                     else if (returnValue == -1)
                     {
-                        MessageBox.Show("Paquete no esta disponible, ya que no esta disponible en este horario");
+                        MessageBox.Show("Paquete no disponible en el horario seleccionado");
                     }
                     else
                     {

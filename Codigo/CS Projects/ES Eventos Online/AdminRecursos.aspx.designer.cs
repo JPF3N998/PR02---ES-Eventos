@@ -40,6 +40,15 @@ namespace ES_Eventos_Online {
         protected global::System.Web.UI.WebControls.Button newRecursoBtn;
         
         /// <summary>
+        /// editRecursoBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button editRecursoBtn;
+        
+        /// <summary>
         /// deleteRecursoBtn control.
         /// </summary>
         /// <remarks>
@@ -130,13 +139,130 @@ namespace ES_Eventos_Online {
         protected global::System.Web.UI.WebControls.TextBox provinciaInput;
         
         /// <summary>
-        /// addRercursoBtn control.
+        /// addRecursoBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addRercursoBtn;
+        protected global::System.Web.UI.WebControls.Button addRecursoBtn;
+        
+        /// <summary>
+        /// editRecursoPart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl editRecursoPart;
+        
+        /// <summary>
+        /// editRecursoLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label editRecursoLabel;
+        
+        /// <summary>
+        /// idRecursoEditLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label idRecursoEditLabel;
+        
+        /// <summary>
+        /// recursoIDEditInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox recursoIDEditInput;
+        
+        /// <summary>
+        /// nameRecursoEditLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label nameRecursoEditLabel;
+        
+        /// <summary>
+        /// recursoNombreEditInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox recursoNombreEditInput;
+        
+        /// <summary>
+        /// correoRecursoEditLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label correoRecursoEditLabel;
+        
+        /// <summary>
+        /// recursoCorreoEditInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox recursoCorreoEditInput;
+        
+        /// <summary>
+        /// telefonoLbl0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label telefonoLbl0;
+        
+        /// <summary>
+        /// telefonoEditInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox telefonoEditInput;
+        
+        /// <summary>
+        /// provinciaEditLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label provinciaEditLbl;
+        
+        /// <summary>
+        /// provinciaEditInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox provinciaEditInput;
+        
+        /// <summary>
+        /// modifRercursoBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button modifRercursoBtn;
         
         /// <summary>
         /// deleteRecursoPart control.
@@ -202,13 +328,13 @@ namespace ES_Eventos_Online {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl agregarPaquetePart;
         
         /// <summary>
-        /// Label1 control.
+        /// recursoNameLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label recursoNameLabel;
         
         /// <summary>
         /// inputRecursoName control.
@@ -272,6 +398,15 @@ namespace ES_Eventos_Online {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button openProductoSectionBtn;
+        
+        /// <summary>
+        /// editProductoBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button editProductoBtn;
         
         /// <summary>
         /// openProductoDeleteSectionBtn control.
@@ -353,6 +488,105 @@ namespace ES_Eventos_Online {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button addProductoBtn;
+        
+        /// <summary>
+        /// editProductoPart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl editProductoPart;
+        
+        /// <summary>
+        /// editProductoLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label editProductoLabel;
+        
+        /// <summary>
+        /// idProducto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label idProducto;
+        
+        /// <summary>
+        /// productoEditIdInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox productoEditIdInput;
+        
+        /// <summary>
+        /// idPaqueteLbl0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label idPaqueteLbl0;
+        
+        /// <summary>
+        /// productoEditPaqueteInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox productoEditPaqueteInput;
+        
+        /// <summary>
+        /// nombreProducto0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label nombreProducto0;
+        
+        /// <summary>
+        /// productoEditNombreInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox productoEditNombreInput;
+        
+        /// <summary>
+        /// precioProductoLbl0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label precioProductoLbl0;
+        
+        /// <summary>
+        /// productoEditPrecioInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox productoEditPrecioInput;
+        
+        /// <summary>
+        /// modifProductoBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button modifProductoBtn;
         
         /// <summary>
         /// borrarProductoPart control.

@@ -14,7 +14,7 @@
             <h1 id="adminLbl" style="font-size: 72px;color: #FFFFFF; text-decoration: underline; font-weight: bolder;margin-left:20px">Administrador</h1>
         </div>
         <div style="text-align:center;margin-bottom:50px">
-           <asp:Button ID="resourcesBtn" runat="server" Text="Gestionar recursos" BorderStyle="Solid" style="margin-bottom:30px;" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238" Width="866px" OnClick="resourcesBtn_Click"/>
+           <asp:Button ID="resourcesBtn" runat="server" Text="Gestionar recursos" BorderStyle="Solid" style="margin-bottom:30px;" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238" OnClick="resourcesBtn_Click"/>
             <br />
             <asp:Button ID="registerAdminBtn" runat="server" Text="Registrar nuevo administrador" BorderStyle="Solid" style="margin-bottom:30px;width:auto" BorderWidth="3px" BorderColor="#2c3e50" Font-Bold="true" Font-Size="40px" ForeColor="#FFFFFF" BackColor="#263238" OnClick="registerAdminBtn_Click"/>
             <br />

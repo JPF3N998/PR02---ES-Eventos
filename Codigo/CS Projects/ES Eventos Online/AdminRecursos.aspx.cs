@@ -32,7 +32,7 @@ namespace ES_Eventos_Online
                 newRecursoPart.Visible = true;
         }
 
-        protected void addRercursoBtn_Click(object sender, EventArgs e)
+        protected void addRecursoBtn_Click(object sender, EventArgs e)
         {
             String nombreGot, correoGot, telefonoGot, provinciaGot;
             nombreGot = this.nombreInput.Text;
@@ -82,6 +82,88 @@ namespace ES_Eventos_Online
             }
         }
 
+        protected void editRecursoBtn_Click(object sender, EventArgs e)
+        {
+            if (editRecursoPart.Visible == true)
+            {
+                editRecursoPart.Visible = false;
+            }
+            else
+                editRecursoPart.Visible = true;
+        }
+
+        protected void modifRecursoBtn_Click(object sender, EventArgs e)
+        {
+            String idGot, nombreGot, correoGot, telefonoGot, provinciaGot;
+            idGot = this.recursoIDEditInput.Text;
+            nombreGot = this.recursoNombreEditInput.Text;
+            correoGot = this.recursoCorreoEditInput.Text;
+            telefonoGot = this.telefonoEditInput.Text;
+            provinciaGot = this.provinciaEditInput.Text;
+            if (idGot.Equals(""))
+            {
+                MessageBox.Show("ID no ingresada");
+            }
+            else if (nombreGot.Equals("") & correoGot.Equals("") & telefonoGot.Equals("") & provinciaGot.Equals(""))
+            {
+                MessageBox.Show("Al menos un campo debe contener informacion");
+            }
+            else
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("spModifyRecurso", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@idRecurso", SqlDbType.NVarChar).Value = int.Parse(idGot);
+                    if (!nombreGot.Equals(""))
+                        cmd.Parameters.Add("@nombreRecurso", SqlDbType.NVarChar).Value = nombreGot;
+                    if (!correoGot.Equals(""))
+                        cmd.Parameters.Add("@correoRecurso", SqlDbType.NVarChar).Value = correoGot;
+                    if (!telefonoGot.Equals(""))
+                        cmd.Parameters.Add("@telefonoRecurso", SqlDbType.NVarChar).Value = telefonoGot;
+                    if (!provinciaGot.Equals(""))
+                        cmd.Parameters.Add("@provinciaRecurso", SqlDbType.NVarChar).Value = provinciaGot;
+
+                    cmd.Parameters.Add("@success", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    int returnValue = Int32.Parse(cmd.Parameters["@success"].Value.ToString());
+
+                    System.Diagnostics.Debug.WriteLine("spModifyRecurso: " + returnValue.ToString());
+                    if (returnValue == 0)
+                    {
+                        MessageBox.Show("Recurso ID:" + idGot + " modificado exitosamente");
+                        editRecursoPart.Visible = false;
+                    }
+                    else if (returnValue == -2)
+                    {
+                        MessageBox.Show("Recurso ID:" + idGot + " no existe");
+                    }
+                    else
+                        MessageBox.Show("No se pudo modificar el recurso seleccionado.");
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Datos ingresados no son validos");
+                }
+            }
+        }
+
+        protected void deleteRecursoBtn_Click(object sender, EventArgs e)
+        {
+            if (deleteRecursoPart.Visible == true)
+            {
+                deleteRecursoPart.Visible = false;
+            }
+            else
+            {
+                deleteRecursoPart.Visible = true;
+            }
+        }
+
         protected void borrarRecursoBtn_Click(object sender, EventArgs e)
         {
             string nombreRecursoGot = this.recursoInputBorrar.Text;
@@ -120,18 +202,6 @@ namespace ES_Eventos_Online
                 {
                     MessageBox.Show("Datos ingresados invalidos");
                 }
-            }
-        }
-
-        protected void deleteRecursoBtn_Click(object sender, EventArgs e)
-        {
-            if(deleteRecursoPart.Visible == true)
-            {
-                deleteRecursoPart.Visible = false;
-            }
-            else
-            {
-                deleteRecursoPart.Visible = true;
             }
         }
 
@@ -210,7 +280,7 @@ namespace ES_Eventos_Online
                 //{
                     SqlCommand cmd = new SqlCommand("spEliminarPaquete", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@idPaquete", SqlDbType.NVarChar).Value = int.Parse(idPaqueteGot);
+                    cmd.Parameters.Add("@idPaquete", SqlDbType.Int).Value = int.Parse(idPaqueteGot);
                     cmd.Parameters.Add("@success", SqlDbType.Bit).Direction = ParameterDirection.ReturnValue;
 
                     con.Open();
@@ -257,7 +327,7 @@ namespace ES_Eventos_Online
                 cmd.Parameters.Add("@idPaquete", SqlDbType.Int).Value = int.Parse(idPaqueteGot);
                 cmd.Parameters.Add("@nombreProducto", SqlDbType.NVarChar).Value = nombreProductoGot;
                 cmd.Parameters.Add("@precioProducto", SqlDbType.Float).Value = float.Parse(precioProductoGot);
-                cmd.Parameters.Add("@success", SqlDbType.Bit).Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add("@success", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -268,13 +338,68 @@ namespace ES_Eventos_Online
                 if (returnValue == -1)
                 {
                     MessageBox.Show("Paquete " + idPaqueteGot + " no existe.");
-
+                }
+                else if (returnValue == -2)
+                {
+                    MessageBox.Show("Un producto de nombre \"" + nombreProductoGot + "\" ya existe en el paquete ID:" + idPaqueteGot);
                 }
                 else
                 {
                     MessageBox.Show("Producto " + nombreProductoGot + " agregado al paquete "+idPaqueteGot+" de manera exitosa");
                     this.agregarProductoPart.Visible = false;
 
+                }
+            }
+        }
+
+        protected void modifProductoBtn_Click(object sender, EventArgs e)
+        {
+            String idGot, paqueteGot, nombreGot, precioGot;
+            idGot = this.productoEditIdInput.Text;
+            paqueteGot = this.productoEditPaqueteInput.Text;
+            nombreGot = this.productoEditNombreInput.Text;
+            precioGot = this.productoEditPrecioInput.Text;
+
+            if (idGot.Equals(""))
+            {
+                MessageBox.Show("ID no ingresada");
+            }
+            else if (paqueteGot.Equals("") & nombreGot.Equals("") & precioGot.Equals(""))
+            {
+                MessageBox.Show("Al menos un campo debe contener informacion");
+            }
+            else
+            {
+                SqlCommand cmd = new SqlCommand("spModifyProducto", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@idProducto", SqlDbType.Int).Value = int.Parse(idGot);
+                if (!paqueteGot.Equals(""))
+                    cmd.Parameters.Add("@idPaquete", SqlDbType.Int).Value = int.Parse(paqueteGot);
+                if (!nombreGot.Equals(""))
+                    cmd.Parameters.Add("@nombreProducto", SqlDbType.NVarChar).Value = nombreGot;
+                if (!precioGot.Equals(""))
+                    cmd.Parameters.Add("@precioProducto", SqlDbType.Float).Value = float.Parse(precioGot);
+
+                cmd.Parameters.Add("@success", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                int returnValue = Int32.Parse(cmd.Parameters["@success"].Value.ToString());
+                System.Diagnostics.Debug.WriteLine("spModifyProducto: " + returnValue.ToString());
+                if (returnValue == -1)
+                {
+                    MessageBox.Show("Paquete ID:" + paqueteGot + " no existe.");
+                }
+                else if (returnValue == -2)
+                {
+                    MessageBox.Show("Un producto de nombre \"" + nombreGot + "\" ya existe en el paquete ID:" + paqueteGot);
+                }
+                else
+                {
+                    MessageBox.Show("Producto ID:" + idGot + " modificado exitosamente.");
+                    this.editProductoPart.Visible = false;
                 }
             }
         }
@@ -324,6 +449,18 @@ namespace ES_Eventos_Online
             else
             {
                 agregarProductoPart.Visible = false;
+            }
+        }
+
+        protected void editProductoBtn_Click(object sender, EventArgs e)
+        {
+            if (this.editProductoPart.Visible == false)
+            {
+                editProductoPart.Visible = true;
+            }
+            else
+            {
+                editProductoPart.Visible = false;
             }
         }
 

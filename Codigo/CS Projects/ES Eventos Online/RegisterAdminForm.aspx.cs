@@ -85,10 +85,10 @@ namespace ES_Eventos_Online
 
             // Se informa al cliente si ocurrio algun error en la creacion de la cuenta o si fue exitosa la creacion
             if (returnValue == -1)
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error la cuenta ya existe');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error: la cuenta ya existe');", true);
             else
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('La cuenta fue creada');", true);
-            Response.Redirect("LoginForm.aspx");
+            Response.Redirect("AdministradorPortal.aspx");
         }
     }
 }

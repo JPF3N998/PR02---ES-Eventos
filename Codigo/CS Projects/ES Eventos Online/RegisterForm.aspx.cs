@@ -13,17 +13,13 @@ namespace ES_Eventos_Online
     public partial class RegisterLogin : System.Web.UI.Page
     {
         string server = "Data Source=" + Global.configServerName + ";Initial Catalog=ESEventosOnline;Integrated Security=True";
-        static string andreyConString = Global.configServerName + ";Initial Catalog=ESEventosOnline;Integrated Security=True";
-        static string fengConString = ConfigurationManager.ConnectionStrings["fengConnectionString"].ConnectionString;
-        static SqlConnection feng = new SqlConnection(fengConString);
-        SqlConnection andrey = new SqlConnection(andreyConString);
 
         //Cambiar aqui segun quien lo este usando
         SqlConnection con;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            con = feng;
+            con = LoginForm.con;
         }
 
         protected void signupBtn_Click(object sender, EventArgs e)
@@ -89,7 +85,7 @@ namespace ES_Eventos_Online
 
             // Se informa al cliente si ocurrio algun error en la creacion de la cuenta o si fue exitosa la creacion
             if (returnValue == -1)
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error la cuenta ya existe');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Error: la cuenta ya existe');", true);
             else
                 MessageBox.Show("Cuenta creada exitosamente");
                 Response.Redirect("LoginForm.aspx");
