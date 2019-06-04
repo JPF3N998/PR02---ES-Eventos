@@ -41,7 +41,7 @@ namespace ES_Eventos_Online
             provinciaGot = this.provinciaInput.Text;
             if (nombreGot.Equals("") | correoGot.Equals("") | telefonoGot.Equals("") | provinciaGot.Equals(""))
             {
-                MessageBox.Show("Hay campos vacios");
+                MessageBox.CamposVacios();
             }
             else
             {

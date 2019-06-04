@@ -89,13 +89,21 @@ namespace ES_Eventos_Online
             horaInicioGot = this.inputHoraInicio.Text;
             horaFinGot = this.horaFinInput.Text;
 
-            if (idPaqueteGot =="" | fechaGot=="" |horaInicioGot=="" | horaFinGot=="")
+            if (idPaqueteGot =="" | fechaGot=="" | horaInicioGot=="" | horaFinGot=="")
             {
                 MessageBox.CamposVacios();
             }
             else
             {
                 try {
+                    if (fechaGot != "" & (fechaGot.Length - fechaGot.Replace("/", "").Length) < 2)
+                        throw new Exception();
+
+                    else if ((horaInicioGot != "" & !horaInicioGot.Contains(":")) | (horaFinGot != "" & !horaFinGot.Contains(":")))
+                    {
+                        throw new Exception();
+                    }
+
                     SqlConnection con = LoginForm.con;
                     System.Diagnostics.Debug.WriteLine(currentUser);
                     SqlCommand cmd = new SqlCommand("spReservar", con);
@@ -116,24 +124,122 @@ namespace ES_Eventos_Online
                     // Valor de retorno importante
                     int returnValue = Int32.Parse(cmd.Parameters["@success"].Value.ToString());
                     System.Diagnostics.Debug.WriteLine("spReservar: " + returnValue.ToString());
-                    if (returnValue == 0)
+                    switch (returnValue)
                     {
-                        MessageBox.Show("Reservacion establecida");
-                        updateGrid();
+                        case (-1):
+                            MessageBox.Show("Error: Cliente no pudo ser encontrado");
+                            break;
+                        case (-2):
+                            MessageBox.Show("Error: Paquete ID:" + idPaqueteGot + " no existe");
+                            break;
+                        case (-3):
+                            MessageBox.Show("Error: Deben existir mas de 7 dias entre la fecha actual y la fecha del evento");
+                            break;
+                        case (-4):
+                            MessageBox.Show("Error: Intervalo de Horas invalido - Menor a 60 min o Inicio es mayor a Fin");
+                            break;
+                        case (-5):
+                            MessageBox.Show("Error: hay choque de horarios");
+                            break;
+                        case (-6):
+                            MessageBox.Show("Error en la transaccion a la hora de modificar reservacion");
+                            break;
+                        default:
+                            MessageBox.Show("Reservacion modificada exitosamente");
+                            updateGrid();
+                            break;
                     }
-                    else if (returnValue == -1)
-                    {
-                        MessageBox.Show("Paquete no disponible en el horario seleccionado");
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se puedo establecer la reservacion");
-                    }
-                }catch(Exception){
+                }
+                catch(Exception){
                     MessageBox.Show("Datos invalidos");
                 }
-                
-                
+            }
+        }
+
+        protected void modificarBtn_Click(object sender, EventArgs e)
+        {
+            //Variables para almacenar los strings provenientes de los text boxes
+            string idGot, paqueteGot, fechaGot, horaIniGot, horaFinGot;
+            idGot = this.editIdInput.Text;
+            paqueteGot = this.editPaqueteInput.Text;
+            fechaGot = this.editFechaInput.Text;
+            horaIniGot = this.editHoraIniInput.Text;
+            horaFinGot = this.editHoraFinInput.Text;
+
+            if (idGot == "")
+            {
+                MessageBox.Show("ID no ingresada");
+            }
+            else if (paqueteGot == "" & fechaGot == "" & horaIniGot == "" & horaFinGot == "")
+            {
+                MessageBox.Show("Al menos un campo debe contener informacion");
+            }
+            else
+            {
+                try
+                {
+                    if (fechaGot != "" & (fechaGot.Length - fechaGot.Replace("/", "").Length) < 2)
+                        throw new Exception();
+
+                    else if ((horaIniGot != "" & !horaIniGot.Contains(":")) | (horaFinGot != "" & !horaFinGot.Contains(":")))
+                    {
+                        throw new Exception();
+                    }
+                    SqlConnection con = LoginForm.con;
+                    System.Diagnostics.Debug.WriteLine(currentUser);
+                    SqlCommand cmd = new SqlCommand("spModifyReservacion", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@usuario", SqlDbType.NVarChar).Value = currentUser.ToString();
+                    cmd.Parameters.Add("@idReservacion", SqlDbType.Int).Value = Int32.Parse(idGot);
+                    if (paqueteGot != "")
+                        cmd.Parameters.Add("@idPaquete", SqlDbType.Int).Value = Int32.Parse(paqueteGot);
+                    if (fechaGot != "")
+                        cmd.Parameters.Add("@fecha", SqlDbType.NVarChar).Value = fechaGot;
+                    if (horaIniGot != "")
+                        cmd.Parameters.Add("@horaIni", SqlDbType.NVarChar).Value = horaIniGot;
+                    if (horaFinGot != "")
+                        cmd.Parameters.Add("@horaFin", SqlDbType.NVarChar).Value = horaFinGot;
+                    cmd.Parameters.Add("@success", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+
+                    // Valor de retorno importante
+                    int returnValue = Int32.Parse(cmd.Parameters["@success"].Value.ToString());
+                    System.Diagnostics.Debug.WriteLine("spModifyReservacion: " + returnValue.ToString());
+
+                    switch (returnValue)
+                    {
+                        case (-1):
+                            MessageBox.Show("Error: Reservacion no existe o no fue realizada por el Cliente");
+                            break;
+                        case (-2):
+                            MessageBox.Show("Error: Paquete ID:"+paqueteGot+" no existe");
+                            break;
+                        case (-3):
+                            MessageBox.Show("Error: Deben existir mas de 7 dias entre la fecha actual y la fecha del evento");
+                            break;
+                        case (-4):
+                            MessageBox.Show("Error: Intervalo de Horas invalido - Menor a 60 min o Inicio es mayor a Fin");
+                            break;
+                        case (-5):
+                            MessageBox.Show("Error: hay choque de horarios");
+                            break;
+                        case (-6):
+                            MessageBox.Show("Error en la transaccion a la hora de modificar reservacion");
+                            break;
+                        default:
+                            MessageBox.Show("Reservacion modificada exitosamente");
+                            updateGrid();
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error: Datos invalidos");
+                }
             }
         }
 
@@ -142,7 +248,7 @@ namespace ES_Eventos_Online
             String idReservacionGot = this.idReservacionInput.Text;
             if (idReservacionGot.Length == 0 )
             {
-                MessageBox.Show("Campo vacio");
+                MessageBox.CamposVacios();
             }
             else
             {
@@ -163,16 +269,16 @@ namespace ES_Eventos_Online
                     System.Diagnostics.Debug.WriteLine("spCancelarReservacion: " + returnValue.ToString());
                     if (returnValue == 0)
                     {
-                        MessageBox.Show("Se cancelo la reservacion " + idReservacionGot + " exitosamente");
+                        MessageBox.Show("Se cancelo la reservacion ID:" + idReservacionGot + " exitosamente");
                         updateGrid();
                     }
-                    if (returnValue == -2)
+                    else if (returnValue == -2)
                     {
                         MessageBox.Show("No se puede cancelar la reservacion, hace falta menos de una semana");
                     }
                     else
                     {
-                        MessageBox.Show("No se pudo cancelar la reservacion " + idReservacionGot);
+                        MessageBox.Show("No se pudo cancelar la reservacion ID:" + idReservacionGot);
 
                     }
                     con.Close();
